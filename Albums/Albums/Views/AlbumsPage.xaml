@@ -18,7 +18,7 @@
       <CollectionView.ItemTemplate>
         <DataTemplate>
           <StackLayout Padding="10">
-            <Label Text="{Binding Text}" 
+            <Label Text="{Binding Title}" 
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="16" />
