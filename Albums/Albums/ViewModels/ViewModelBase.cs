@@ -1,4 +1,4 @@
-﻿// <copyright file="BaseViewModel.cs" company="Marco von Ballmoos">
+﻿// <copyright file="ViewModelBase.cs" company="Marco von Ballmoos">
 //   Copyright (c) 2021 Marco von Ballmoos. All rights reserved.
 // </copyright>
 
@@ -6,14 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
-
 using Albums.Models;
 using Albums.Services;
+using Xamarin.Forms;
 
 namespace Albums.ViewModels
 {
-  public class BaseViewModel : INotifyPropertyChanged
+  public class ViewModelBase : INotifyPropertyChanged
   {
     public bool IsBusy
     {

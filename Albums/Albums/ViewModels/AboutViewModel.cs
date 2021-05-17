@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace Albums.ViewModels
 {
-  public class AboutViewModel : BaseViewModel
+  public class AboutViewModel : ViewModelBase
   {
     public AboutViewModel()
     {
