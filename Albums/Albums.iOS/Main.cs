@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// <copyright file="Main.cs" company="Marco von Ballmoos">
+//   Copyright (c) 2021 Marco von Ballmoos. All rights reserved.
+// </copyright>
 
-using Foundation;
 using UIKit;
 
 namespace Albums.iOS
 {
-    public class Application
+  public class Application
+  {
+    // This is the main entry point of the application.
+    internal static void Main(string[] args)
     {
-        // This is the main entry point of the application.
-        static void Main(string[] args)
-        {
-            // if you want to use a different Application Delegate class from "AppDelegate"
-            // you can specify it here.
-            UIApplication.Main(args, null, "AppDelegate");
-        }
+      // if you want to use a different Application Delegate class from "AppDelegate"
+      // you can specify it here.
+      UIApplication.Main(args, null, "AppDelegate");
     }
+  }
 }
