@@ -6,9 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Albums.Models;
-using Albums.Services;
-using Xamarin.Forms;
 
 namespace Albums.ViewModels
 {
@@ -27,8 +24,6 @@ namespace Albums.ViewModels
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
-
-    protected IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 
     protected bool SetProperty<T>(
       ref T backingStore,

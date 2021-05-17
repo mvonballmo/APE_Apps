@@ -6,27 +6,27 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Albums.Models;
-using Albums.Views;
 using Xamarin.Forms;
 
 namespace Albums.ViewModels
 {
-  public class ListViewModelBase : ViewModelBase
+  public class ListViewModelBase<TItem, TPage> : ItemViewModelBase<TItem>
+    where TItem : class
+    where TPage : class
   {
-    public ObservableCollection<Item> Items { get; set; }
+    public ObservableCollection<TItem> Items { get; set; }
 
     public Command LoadItemsCommand { get; set; }
 
     public ListViewModelBase()
     {
       Title = "Browse";
-      Items = new ObservableCollection<Item>();
+      Items = new ObservableCollection<TItem>();
       LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-      MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
+      MessagingCenter.Subscribe<TPage, TItem>(this, "AddItem", async (obj, item) =>
       {
-        var newItem = item as Item;
+        var newItem = item as TItem;
         Items.Add(newItem);
         await DataStore.AddItemAsync(newItem);
       });

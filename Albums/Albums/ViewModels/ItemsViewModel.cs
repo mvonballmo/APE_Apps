@@ -12,7 +12,7 @@ using Albums.Views;
 
 namespace Albums.ViewModels
 {
-  public class ItemsViewModel : ViewModelBase
+  public class ItemsViewModel : ItemViewModelBase<Item>
   {
     public ObservableCollection<Item> Items { get; set; }
     public Command LoadItemsCommand { get; set; }

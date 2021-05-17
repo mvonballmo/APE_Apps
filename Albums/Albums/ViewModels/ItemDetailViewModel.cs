@@ -6,7 +6,7 @@ using Albums.Models;
 
 namespace Albums.ViewModels
 {
-  public class ItemDetailViewModel : ViewModelBase
+  public class ItemDetailViewModel : ItemViewModelBase<Item>
   {
     public Item Item { get; set; }
     public ItemDetailViewModel(Item item = null)
