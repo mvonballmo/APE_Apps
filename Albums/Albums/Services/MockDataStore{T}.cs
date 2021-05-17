@@ -23,7 +23,7 @@ namespace Albums.Services
 
     public async Task<bool> UpdateItemAsync(T item)
     {
-      var oldItem = Items.Where((T arg) => arg.Id == item.Id).FirstOrDefault();
+      var oldItem = Items.FirstOrDefault(arg => arg.Id == item.Id);
       Items.Remove(oldItem);
       Items.Add(item);
 
@@ -32,7 +32,7 @@ namespace Albums.Services
 
     public async Task<bool> DeleteItemAsync(string id)
     {
-      var oldItem = Items.Where((T arg) => arg.Id == id).FirstOrDefault();
+      var oldItem = Items.FirstOrDefault(arg => arg.Id == id);
       Items.Remove(oldItem);
 
       return await Task.FromResult(true);

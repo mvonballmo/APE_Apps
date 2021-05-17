@@ -26,9 +26,8 @@ namespace Albums.ViewModels
 
       MessagingCenter.Subscribe<TPage, TItem>(this, "AddItem", async (obj, item) =>
       {
-        var newItem = item as TItem;
-        Items.Add(newItem);
-        await DataStore.AddItemAsync(newItem);
+        Items.Add(item);
+        await DataStore.AddItemAsync(item);
       });
     }
 
