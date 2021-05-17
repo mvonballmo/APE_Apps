@@ -2,13 +2,17 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:Albums.ViewModels;assembly=Albums"
     x:Class="Albums.Views.AlbumDetailPage"
+    x:Name="BrowseAlbumsPage"
+    x:DataType="viewModels:AlbumDetailViewModel"
+
   Title="{Binding Title}">
 
   <StackLayout Spacing="20" Padding="15">
     <Label Text="Text:" FontSize="Medium" />
-    <Label Text="{Binding Item.Text}" FontSize="Small"/>
+    <Label Text="{Binding Album.Title}" FontSize="Small"/>
     <Label Text="Description:" FontSize="Medium" />
-    <Label Text="{Binding Item.Description}" FontSize="Small"/>
+    <Label Text="{Binding Album.Description}" FontSize="Small"/>
   </StackLayout>
 </ContentPage>
