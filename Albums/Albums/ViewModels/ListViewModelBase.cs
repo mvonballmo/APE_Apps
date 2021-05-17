@@ -11,7 +11,6 @@ using Xamarin.Forms;
 namespace Albums.ViewModels
 {
   public class ListViewModelBase<TItem, TPage> : ItemViewModelBase<TItem>
-    where TItem : class
     where TPage : class
   {
     public ObservableCollection<TItem> Items { get; set; }
