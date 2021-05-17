@@ -23,7 +23,10 @@
       "fileNamingConvention": "stylecop"
     },
     "namingRules": {
-      "tupleElementNameCasing": "camelCase"
+      "tupleElementNameCasing": "camelCase",
+      "allowedNamespaceComponents": [
+        "iOS"
+      ]
     },
     "maintainabilityRules": {
       "topLevelTypes": [

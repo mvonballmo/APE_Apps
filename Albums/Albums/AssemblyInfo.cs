@@ -1,4 +1,4 @@
-// <copyright file="AssemblyInfo.cs" company="Marco von Ballmoos">
+﻿// <copyright file="AssemblyInfo.cs" company="Marco von Ballmoos">
 //   Copyright (c) 2021 Marco von Ballmoos. All rights reserved.
 // </copyright>
 
