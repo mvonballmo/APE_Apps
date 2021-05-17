@@ -4,14 +4,8 @@
 
 namespace Albums.Models
 {
-  public class Picture
+  public class Picture : ContentItem
   {
-    public string Id { get; set; }
-
-    public string Title { get; set; }
-
-    public string Description { get; set; }
-
     public string Url { get; set; }
   }
 }

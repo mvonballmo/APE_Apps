@@ -7,7 +7,7 @@
     <TabbedPage.Children>
         <NavigationPage Title="Browse">
             <x:Arguments>
-                <views:ItemsPage />
+                <views:AlbumsPage />
             </x:Arguments>
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">

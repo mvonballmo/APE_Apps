@@ -14,7 +14,9 @@ namespace Albums
     {
       InitializeComponent();
 
-      DependencyService.Register<MockDataStore>();
+      DependencyService.Register<ItemMockDataStore>();
+      DependencyService.Register<AlbumMockDataStore>();
+
       MainPage = new MainPage();
     }
 

@@ -4,14 +4,7 @@
 
 namespace Albums.Models
 {
-  // TODO Extract base class for common properties
-
-  public class Album
+  public class Album : ContentItem
   {
-    public string Id { get; set; }
-
-    public string Title { get; set; }
-
-    public string Description { get; set; }
   }
 }
