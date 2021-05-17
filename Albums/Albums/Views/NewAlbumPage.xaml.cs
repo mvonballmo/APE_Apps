@@ -10,13 +10,13 @@ namespace Albums.Views
 {
   public partial class NewAlbumPage : ContentPage
   {
-    public Album Item { get; set; }
+    public Album Album { get; set; }
 
     public NewAlbumPage()
     {
       InitializeComponent();
 
-      Item = new Album
+      Album = new Album
       {
         Title = "Album name",
         Description = "This album contains vacation photos."
@@ -27,7 +27,7 @@ namespace Albums.Views
 
     private async void Save_Clicked(object sender, EventArgs e)
     {
-      MessagingCenter.Send(this, "AddItem", Item);
+      MessagingCenter.Send(this, "AddItem", Album);
       await Navigation.PopModalAsync();
     }
 
