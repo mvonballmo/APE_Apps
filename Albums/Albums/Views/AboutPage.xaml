@@ -4,7 +4,8 @@
              xmlns:vm="clr-namespace:Albums.ViewModels"
              x:Class="Albums.Views.AboutPage"
              x:DataType="vm:AboutViewModel"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             x:Name="Page">
     
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
@@ -70,6 +71,7 @@
                 </Label>
                 <Button Margin="0,10,0,0" Text="Learn more"
                         Command="{Binding OpenWebCommand}"
+                        CommandParameter="{x:Reference Page}"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
             </StackLayout>

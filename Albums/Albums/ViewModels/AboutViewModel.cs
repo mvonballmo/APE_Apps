@@ -13,7 +13,16 @@ namespace Albums.ViewModels
     public AboutViewModel()
     {
       Title = "About";
-      OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://xamarin.com"));
+      OpenWebCommand = new Command<Page>(
+        async page =>
+        {
+          var result = await page.DisplayAlert("Confirm", "Are you sure you want to open this web site?", "YES", "NO");
+          if (result)
+          {
+            await Browser.OpenAsync("https://xamarin.com");
+          }
+        }
+      );
     }
 
     public ICommand OpenWebCommand { get; }
