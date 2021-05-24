@@ -16,19 +16,26 @@ namespace Albums.Views
     {
       InitializeComponent();
 
-      Album = new Album
-      {
-        Title = "Album name",
-        Description = "This album contains vacation photos."
-      };
+      Album = new Album();
 
       BindingContext = this;
     }
 
     private async void Save_Clicked(object sender, EventArgs e)
     {
-      MessagingCenter.Send(this, "AddItem", Album);
-      await Navigation.PopModalAsync();
+      if (string.IsNullOrEmpty(Album.Title))
+      {
+        await DisplayAlert("Validation failed", "The title cannot be empty.", "OK");
+      }
+      else if (string.IsNullOrEmpty(Album.Description))
+      {
+        await DisplayAlert("Validation failed", "The description cannot be empty.", "OK");
+      }
+      else
+      {
+        MessagingCenter.Send(this, "AddItem", Album);
+        await Navigation.PopModalAsync();
+      }
     }
 
     private async void Cancel_Clicked(object sender, EventArgs e)
