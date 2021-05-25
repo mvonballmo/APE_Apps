@@ -4,18 +4,22 @@
 
 using System;
 using Albums.Models;
+using Albums.Services;
 using Xamarin.Forms;
 
 namespace Albums.Views
 {
   public partial class NewAlbumPage : ContentPage
   {
+    private readonly IDialogService _dialogService;
+
     public Album Album { get; set; }
 
     public NewAlbumPage()
     {
       InitializeComponent();
 
+      _dialogService = App.Services.GetInstance<IDialogService>();
       Album = new Album();
 
       BindingContext = this;
@@ -25,11 +29,11 @@ namespace Albums.Views
     {
       if (string.IsNullOrEmpty(Album.Title))
       {
-        await DisplayAlert("Validation failed", "The title cannot be empty.", "OK");
+        await _dialogService.Show("Validation failed", "The title cannot be empty.");
       }
       else if (string.IsNullOrEmpty(Album.Description))
       {
-        await DisplayAlert("Validation failed", "The description cannot be empty.", "OK");
+        await _dialogService.Show("Validation failed", "The description cannot be empty.");
       }
       else
       {

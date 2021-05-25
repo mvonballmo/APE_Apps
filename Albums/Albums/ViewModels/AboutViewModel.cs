@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Windows.Input;
+using Albums.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -16,7 +17,8 @@ namespace Albums.ViewModels
       OpenWebCommand = new Command<Page>(
         async page =>
         {
-          var result = await page.DisplayAlert("Confirm", "Are you sure you want to open this web site?", "YES", "NO");
+          var dialogService = App.Services.GetInstance<IDialogService>();
+          var result = await dialogService.Ask("Confirm", "Are you sure you want to open this web site?");
           if (result)
           {
             await Browser.OpenAsync("https://xamarin.com");
