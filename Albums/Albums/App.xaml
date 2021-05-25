@@ -22,6 +22,12 @@
         <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryText}" />
       </Style>
+      <Style TargetType="Entry">
+        <Setter Property="PlaceholderColor" Value="{StaticResource LightTextColor}" />
+      </Style>
+      <Style TargetType="Editor">
+        <Setter Property="PlaceholderColor" Value="{StaticResource LightTextColor}" />
+      </Style>
     </ResourceDictionary>
   </Application.Resources>
 
