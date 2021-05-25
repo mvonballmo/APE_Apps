@@ -18,7 +18,8 @@ namespace Albums.Core
       {
         Options =
         {
-          ResolveUnregisteredConcreteTypes = true
+          ResolveUnregisteredConcreteTypes = true,
+          AllowOverridingRegistrations = true
         }
       };
     }
@@ -29,6 +30,7 @@ namespace Albums.Core
 
       container.RegisterSingleton<IDataStore<Album>, AlbumMockDataStore>();
       container.RegisterSingleton<IDialogService, DialogService>();
+      container.RegisterSingleton<IAlbumSaver, AlbumSaver>();
 
       return container;
     }

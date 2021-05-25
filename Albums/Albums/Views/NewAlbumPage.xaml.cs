@@ -11,7 +11,7 @@ namespace Albums.Views
 {
   public partial class NewAlbumPage : ContentPage
   {
-    private readonly IDialogService _dialogService;
+    private readonly IAlbumSaver _albumSaver;
 
     public Album Album { get; set; }
 
@@ -19,23 +19,15 @@ namespace Albums.Views
     {
       InitializeComponent();
 
-      _dialogService = App.Services.GetInstance<IDialogService>();
+      _albumSaver = App.Services.GetInstance<IAlbumSaver>();
       Album = new Album();
 
       BindingContext = this;
     }
 
-    public async void Save_Clicked(object sender, EventArgs e)
+    private async void Save_Clicked(object sender, EventArgs e)
     {
-      if (string.IsNullOrEmpty(Album.Title))
-      {
-        await _dialogService.Show("Validation failed", "The title cannot be empty.");
-      }
-      else if (string.IsNullOrEmpty(Album.Description))
-      {
-        await _dialogService.Show("Validation failed", "The description cannot be empty.");
-      }
-      else
+      if (await _albumSaver.TrySaveAsync(Album))
       {
         MessagingCenter.Send(this, "AddItem", Album);
         await Navigation.PopModalAsync();

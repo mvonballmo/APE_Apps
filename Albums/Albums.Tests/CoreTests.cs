@@ -2,11 +2,12 @@
 //   Copyright (c) 2021 Marco von Ballmoos. All rights reserved.
 // </copyright>
 
-using System;
+using System.Threading.Tasks;
 using Albums.Core;
-using Albums.Views;
+using Albums.Models;
+using Albums.Services;
+using FakeItEasy;
 using NUnit.Framework;
-using Xamarin.Forms;
 
 namespace Albums.Tests
 {
@@ -14,17 +15,22 @@ namespace Albums.Tests
   public class CoreTests
   {
     [Test]
-    public void TestSave()
+    public async Task TestSaveEmptyAlbum()
     {
       var container = ContainerExtensions
         .CreateContainer()
         .RegisterAlbumServices();
 
-      var newAlbumPage = new NewAlbumPage();
+      var dialogService = A.Fake<IDialogService>();
 
-      container.RegisterInstance<Page>(newAlbumPage);
+      container.RegisterInstance(dialogService);
 
-      newAlbumPage.Save_Clicked(null, EventArgs.Empty);
+      var albumSaver = container.GetInstance<IAlbumSaver>();
+
+      var album = new Album();
+
+      Assert.That(await albumSaver.TrySaveAsync(album), Is.False);
+      A.CallTo(() => dialogService.Show(A<string>.Ignored, A<string>.Ignored)).MustHaveHappenedOnceExactly();
     }
   }
 }
