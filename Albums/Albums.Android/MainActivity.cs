@@ -2,10 +2,14 @@
 //   Copyright (c) 2021 Marco von Ballmoos. All rights reserved.
 // </copyright>
 
+using System.Threading.Tasks;
+using Albums.Views;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using Xamarin.Forms;
 
 namespace Albums.Droid
 {
@@ -31,8 +35,45 @@ namespace Albums.Droid
       base.OnCreate(savedInstanceState);
 
       Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-      Xamarin.Forms.Forms.Init(this, savedInstanceState);
+      Forms.Init(this, savedInstanceState);
       LoadApplication(new App());
+
+      // Check if our notification was clicked while the app was closed.
+      var extraValue = Intent.GetStringExtra(IntentExtraName);
+      if (!string.IsNullOrEmpty(extraValue))
+      {
+        ShowNewAlbumPage();
+      }
+      else if (Intent.Extras?.Get("RemoteKey") != null)
+      {
+        ShowNewAlbumPage();
+      }
+    }
+
+    protected override void OnNewIntent(Intent intent)
+    {
+      // Do something with the data you pass from the notification.
+      var extraValue = intent.GetStringExtra(IntentExtraName);
+      if (!string.IsNullOrEmpty(extraValue))
+      {
+        ShowNewAlbumPage();
+      }
+
+      base.OnNewIntent(intent);
+    }
+
+    private const string IntentExtraName = Albums.Droid.NotificationService.IntentExtraName;
+
+    private void ShowNewAlbumPage()
+    {
+      RunOnUiThread(async () =>
+      {
+        // Add a wait to make sure our MainView is loaded up.
+        await Task.Delay(200);
+
+        // Navigate to the new-albums page
+        await App.Services.GetInstance<Page>().Navigation.PushAsync(new NewAlbumPage());
+      });
     }
   }
 }

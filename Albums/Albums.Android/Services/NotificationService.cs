@@ -14,6 +14,8 @@ namespace Albums.Droid
 {
   public class NotificationService : INotificationService
   {
+    public const string IntentExtraName = "FromNotification";
+
     /// <inheritdoc/>
     public void Show(string title, string description)
     {
@@ -36,12 +38,37 @@ namespace Albums.Droid
 
     private static Notification CreateNotification(string title, string description)
     {
+      // Retrieve an intent to launch our app.
+      var launchIntent = GetLaunchIntent();
+
+      // Add some extra (key/value) so we can handle it once the app starts.
+      launchIntent.PutExtra(IntentExtraName, "foo");
+
+      // Create a pending intent which wraps the given intent.
+      var pendingIntent = CreatePendingIntent(launchIntent);
+
       var builder = new NotificationCompat.Builder(MainActivity.Activity, ChannelId)
         .SetContentTitle(title)
         .SetContentText(description)
-        .SetSmallIcon(Resource.Drawable.abc_ic_star_half_black_48dp);
+        .SetContentIntent(pendingIntent)
+        .SetSmallIcon(Resource.Drawable.ic_mtrl_chip_checked_circle)
+        .SetAutoCancel(true);
 
       return builder.Build();
+    }
+
+    private static Intent GetLaunchIntent()
+    {
+      var result = MainActivity.Activity.PackageManager.GetLaunchIntentForPackage(MainActivity.Activity.PackageName);
+
+      result.SetFlags(ActivityFlags.SingleTop);
+
+      return result;
+    }
+
+    private static PendingIntent CreatePendingIntent(Intent notificationIntent)
+    {
+      return PendingIntent.GetActivity(MainActivity.Activity, 0, notificationIntent, PendingIntentFlags.UpdateCurrent);
     }
 
     private static NotificationChannel CreateChannel()
