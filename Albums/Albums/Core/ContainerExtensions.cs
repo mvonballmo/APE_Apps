@@ -21,7 +21,7 @@ namespace Albums.Core
           ResolveUnregisteredConcreteTypes = true,
           AllowOverridingRegistrations = true
         }
-      };
+      }.RegisterAlbumServices();
     }
 
     public static Container RegisterAlbumServices([NotNull] this Container container)

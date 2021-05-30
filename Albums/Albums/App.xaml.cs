@@ -19,7 +19,6 @@ namespace Albums
       var navigationPage = new NavigationPage(mainPage);
 
       Services = ContainerExtensions.CreateContainer();
-      Services.RegisterAlbumServices();
       Services.RegisterInstance<Page>(navigationPage);
 
       MainPage = navigationPage;

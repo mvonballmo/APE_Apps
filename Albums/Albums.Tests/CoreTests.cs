@@ -60,15 +60,13 @@ namespace Albums.Tests
 
     private static Container CreateContainer(out IDialogService dialogService)
     {
-      var container = ContainerExtensions
-        .CreateContainer()
-        .RegisterAlbumServices();
+      var result = ContainerExtensions.CreateContainer();
 
       dialogService = A.Fake<IDialogService>();
 
-      container.RegisterInstance(dialogService);
+      result.RegisterInstance(dialogService);
 
-      return container;
+      return result;
     }
   }
 }
