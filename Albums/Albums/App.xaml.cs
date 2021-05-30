@@ -16,12 +16,11 @@ namespace Albums
       InitializeComponent();
 
       var mainPage = new MainPage();
-      var navigationPage = new NavigationPage(mainPage);
 
       Services = ContainerExtensions.CreateContainer();
-      Services.RegisterInstance<Page>(navigationPage);
+      Services.RegisterInstance<Page>(mainPage);
 
-      MainPage = navigationPage;
+      MainPage = mainPage;
     }
 
     public static Container Services { get; private set; }
