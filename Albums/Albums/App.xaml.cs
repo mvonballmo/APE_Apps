@@ -18,13 +18,14 @@ namespace Albums
       var mainPage = new MainPage();
       var navigationPage = new NavigationPage(mainPage);
 
+      Services = ContainerExtensions.CreateContainer();
       Services.RegisterAlbumServices();
       Services.RegisterInstance<Page>(navigationPage);
 
       MainPage = navigationPage;
     }
 
-    public static Container Services { get; } = ContainerExtensions.CreateContainer();
+    public static Container Services { get; private set; }
 
     protected override void OnStart()
     {
