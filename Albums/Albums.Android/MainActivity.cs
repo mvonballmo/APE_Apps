@@ -12,6 +12,13 @@ namespace Albums.Droid
   [Activity(Label = "Albums", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
   public class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
   {
+    public MainActivity()
+    {
+      Activity = this;
+    }
+
+    public static Activity Activity { get; private set; }
+
     public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
     {
       Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
