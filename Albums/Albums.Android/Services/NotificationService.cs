@@ -17,16 +17,16 @@ namespace Albums.Droid
     /// <inheritdoc/>
     public void Show(string title, string description)
     {
-      var notificationManager = GetNotificationManager();
-
-      // Ensure we have a channel.
-      notificationManager.CreateNotificationChannel(CreateChannel());
-
       // Build the notification with the details.
       var notification = CreateNotification(title, description);
 
       // Show the notification via the system notification manager.
-      notificationManager.Notify(NotificationId, notification);
+      GetNotificationManager().Notify(NotificationId, notification);
+    }
+
+    public void CreateNotificationChannel()
+    {
+      GetNotificationManager().CreateNotificationChannel(CreateChannel());
     }
 
     private const string ChannelId = "AlbumChannel";
