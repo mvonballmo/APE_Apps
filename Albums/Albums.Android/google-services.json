@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "287012292597",
+    "project_id": "albums-23fa4",
+    "storage_bucket": "albums-23fa4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:287012292597:android:ae65a19163afd4fe0d02bc",
+        "android_client_info": {
+          "package_name": "org.hfu.albums"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "287012292597-j36fnpv0j6fvrosjgvr895381csuho2h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtZc7XWzBuS0i9zu6By5iIu-mt1VF1w4Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "287012292597-j36fnpv0j6fvrosjgvr895381csuho2h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
