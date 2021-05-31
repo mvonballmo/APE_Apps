@@ -12,7 +12,7 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(Albums.Droid.NotificationService))]
 
 namespace Albums.Droid
-{ 
+{
   [Service]
   [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
   [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]

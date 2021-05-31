@@ -25,8 +25,6 @@ namespace Albums.ViewModels
           }
         }
       );
-
-      DependencyService.Get<INotificationService>().Show("Title", "Description");
     }
 
     public ICommand OpenWebCommand { get; }
