@@ -2,7 +2,6 @@
 //   Copyright (c) 2021 Marco von Ballmoos. All rights reserved.
 // </copyright>
 
-using Android.Content;
 using Android.Webkit;
 using Android.Widget;
 using Java.Interop;
@@ -15,9 +14,10 @@ namespace Hybrid.Droid
   /// </summary>
   public class JavaScriptInject : Object
   {
-    public JavaScriptInject(Context context)
+    public JavaScriptInject(MainActivity mainActivity, WebView webView)
     {
-      _context = context;
+      _mainActivity = mainActivity;
+      _webView = webView;
     }
 
     /// <summary>
@@ -27,7 +27,13 @@ namespace Hybrid.Droid
     [Export("doSomething")]
     public void FromJavaScript()
     {
-      Toast.MakeText(_context, "Hey from WebView", ToastLength.Short).Show();
+      Toast.MakeText(_mainActivity, "Hey from WebView", ToastLength.Short).Show();
+
+      _mainActivity.RunOnUiThread(() =>
+      {
+        // Evaluate JS in the browser.
+        _webView.EvaluateJavascript("GetRandomNumber()", new Callback());
+      });
     }
 
     /// <summary>
@@ -37,9 +43,10 @@ namespace Hybrid.Droid
     [Export("doSomething")]
     public void FromJavaScript(string message)
     {
-      Toast.MakeText(_context, message, ToastLength.Long).Show();
+      Toast.MakeText(_mainActivity, message, ToastLength.Long).Show();
     }
 
-    private readonly Context _context;
+    private readonly MainActivity _mainActivity;
+    private readonly WebView _webView;
   }
 }

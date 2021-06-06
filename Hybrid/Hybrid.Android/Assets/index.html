@@ -3,6 +3,18 @@
     <head>
         <meta charset="utf-8" />
         <title></title>
+        <script>
+            function GetRandomNumber() {
+                return Math.random();
+            }
+
+            function ReceiveNativeMessage(successful) {
+                if (successful) {
+                    // Navigate to page
+                    return "nameofPage.html";
+                }
+            }
+        </script>
     </head>
     <body>
         <h1>Hybrid Application</h1>

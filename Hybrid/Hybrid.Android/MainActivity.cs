@@ -29,7 +29,7 @@ namespace Hybrid.Droid
 
       // Configure WebView to allow JS and inject our custom interface.
       webView.Settings.JavaScriptEnabled = true;
-      webView.AddJavascriptInterface(new JavaScriptInject(this), "Native");
+      webView.AddJavascriptInterface(new JavaScriptInject(this, webView), "Native");
 
       // Load a local HTML file.
       webView.LoadUrl("file:///android_asset/index.html");
