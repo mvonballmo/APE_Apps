@@ -13,7 +13,9 @@ namespace Albums.ViewModels
       Title = "Password";
       EncryptCommand = new Command(EncryptWithPassword);
       DecryptCommand = new Command(DecryptWithPassword);
+      BiometricCommand = new Command(AuthenticateWithBiometrics);
     }
+
     public string Password
     {
       get => _password;
@@ -37,6 +39,8 @@ namespace Albums.ViewModels
     public ICommand DecryptCommand { get; }
 
     public ICommand NavigateCommand { get; }
+
+    public ICommand BiometricCommand { get; }
 
     private void DecryptWithPassword()
     {
@@ -74,6 +78,22 @@ namespace Albums.ViewModels
       var key = service.GenerateKey(Password);
 
       return (service, key);
+    }
+
+
+    private void AuthenticateWithBiometrics()
+    {
+      var biometricService = DependencyService.Get<IBiometricAuthenticationService>();
+
+      biometricService.Authenticate(() =>
+      {
+        // We're authenticated. Do something...
+        NavigateCommand.Execute(null);
+      },
+      (error) =>
+      {
+        // Failed...
+      });
     }
 
     private void ShowDataMissingMessage()
