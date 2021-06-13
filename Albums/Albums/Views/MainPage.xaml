@@ -26,6 +26,12 @@
                 </OnPlatform>
             </NavigationPage.Icon>
         </NavigationPage>
+
+        <NavigationPage Title="Password">
+            <x:Arguments>
+                <views:PasswordPage />
+            </x:Arguments>
+        </NavigationPage>
     </TabbedPage.Children>
     
 </TabbedPage>

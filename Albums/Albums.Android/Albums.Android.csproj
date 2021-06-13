@@ -71,6 +71,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\FirebaseService.cs" />
+    <Compile Include="Services\PasswordEncryptionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
