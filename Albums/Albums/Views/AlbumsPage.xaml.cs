@@ -11,8 +11,6 @@ namespace Albums.Views
 {
   public partial class AlbumsPage : ContentPage
   {
-    private readonly AlbumsViewModel _viewModel;
-
     public AlbumsPage()
     {
       InitializeComponent();
@@ -41,5 +39,7 @@ namespace Albums.Views
         _viewModel.IsBusy = true;
       }
     }
+
+    private readonly AlbumsViewModel _viewModel;
   }
 }
