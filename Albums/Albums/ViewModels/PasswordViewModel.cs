@@ -47,8 +47,7 @@ namespace Albums.ViewModels
         return;
       }
 
-      var service = DependencyService.Get<IPasswordEncryptionService>();
-      var key = service.GenerateKey(Password);
+      var (service, key) = GetEncryptionTools();
       var decryptedValue = service.Decrypt(Convert.FromBase64String(TextToEncrypt), key);
 
       Output = Encoding.UTF8.GetString(decryptedValue);
@@ -63,11 +62,18 @@ namespace Albums.ViewModels
         return;
       }
 
-      var service = DependencyService.Get<IPasswordEncryptionService>();
-      var key = service.GenerateKey(Password);
+      var (service, key) = GetEncryptionTools();
       var encryptedValue = service.Encrypt(Encoding.UTF8.GetBytes(TextToEncrypt), key);
 
       Output = Convert.ToBase64String(encryptedValue);
+    }
+
+    private (IPasswordEncryptionService service, byte[] key) GetEncryptionTools()
+    {
+      var service = DependencyService.Get<IPasswordEncryptionService>();
+      var key = service.GenerateKey(Password);
+
+      return (service, key);
     }
 
     private void ShowDataMissingMessage()
