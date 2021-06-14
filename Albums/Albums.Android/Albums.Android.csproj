@@ -76,6 +76,7 @@
     <Compile Include="Services\FirebaseService.cs" />
     <Compile Include="Services\PasswordEncryptionService.cs" />
     <Compile Include="Services\BiometricAuthenticationService.cs" />
+    <Compile Include="Security\BiometricCryptoHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -107,6 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <GoogleServicesJson Include="google-services.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Security\" />
   </ItemGroup>
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -11,15 +11,8 @@ namespace Albums.ViewModels
     public PasswordViewModel()
     {
       Title = "Password";
-      EncryptCommand = new Command(EncryptWithPassword);
-      DecryptCommand = new Command(DecryptWithPassword);
-      BiometricCommand = new Command(AuthenticateWithBiometrics);
-    }
-
-    public string Password
-    {
-      get => _password;
-      set => SetProperty(ref _password, value);
+      EncryptCommand = new Command(EncryptWithBiometric);
+      DecryptCommand = new Command(DecryptWithBiometric);
     }
 
     public string TextToEncrypt
@@ -40,66 +33,21 @@ namespace Albums.ViewModels
 
     public ICommand NavigateCommand { get; }
 
-    public ICommand BiometricCommand { get; }
-
-    private void DecryptWithPassword()
+    private void DecryptWithBiometric()
     {
-      if (string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(TextToEncrypt))
-      {
-        ShowDataMissingMessage();
-
-        return;
-      }
-
-      var (service, key) = GetEncryptionTools();
-      var decryptedValue = service.Decrypt(Convert.FromBase64String(TextToEncrypt), key);
-
-      Output = Encoding.UTF8.GetString(decryptedValue);
+      var service = DependencyService.Get<IBiometricAuthenticationService>();
+      service.Decrypt(Convert.FromBase64String(TextToEncrypt), obj => Output = Encoding.UTF8.GetString(obj), ShowBiometricError);
     }
 
-    private void EncryptWithPassword()
+    private void EncryptWithBiometric()
     {
-      if (string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(TextToEncrypt))
-      {
-        ShowDataMissingMessage();
-
-        return;
-      }
-
-      var (service, key) = GetEncryptionTools();
-      var encryptedValue = service.Encrypt(Encoding.UTF8.GetBytes(TextToEncrypt), key);
-
-      Output = Convert.ToBase64String(encryptedValue);
+      var service = DependencyService.Get<IBiometricAuthenticationService>();
+      service.Encrypt(Encoding.UTF8.GetBytes(TextToEncrypt), obj => Output = Convert.ToBase64String(obj), ShowBiometricError);
     }
 
-    private (IPasswordEncryptionService service, byte[] key) GetEncryptionTools()
+    private void ShowBiometricError(string obj)
     {
-      var service = DependencyService.Get<IPasswordEncryptionService>();
-      var key = service.GenerateKey(Password);
-
-      return (service, key);
-    }
-
-
-    private void AuthenticateWithBiometrics()
-    {
-      var biometricService = DependencyService.Get<IBiometricAuthenticationService>();
-
-      biometricService.Authenticate(() =>
-      {
-        // We're authenticated. Do something...
-        NavigateCommand.Execute(null);
-      },
-      (error) =>
-      {
-        Show("Fingerprint Error", error);
-        // Failed...
-      });
-    }
-
-    private void ShowDataMissingMessage()
-    {
-      Show("Data missing", "Please make sure to enter both a password and text to encrypt.");
+      Show("Biometrics", obj);
     }
 
     private void Show(string title, string message)

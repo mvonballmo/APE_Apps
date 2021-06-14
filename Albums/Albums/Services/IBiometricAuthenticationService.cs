@@ -8,6 +8,8 @@ namespace Albums.Services
 {
   public interface IBiometricAuthenticationService
   {
-    void Authenticate(Action success, Action<string> onError);
+    void Encrypt(byte[] input, Action<byte[]> success, Action<string> error);
+
+    void Decrypt(byte[] input, Action<byte[]> success, Action<string> error);
   }
 }

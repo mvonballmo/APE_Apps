@@ -4,11 +4,13 @@
 
 using System;
 using Albums.Droid;
+using Albums.Droid.Security;
 using Android.Content;
 using Android.Hardware.Biometrics;
 using Android.OS;
 using Android.Runtime;
 using Java.Lang;
+using Javax.Crypto;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(Albums.Services.BiometricAuthenticationService))]
@@ -17,15 +19,33 @@ namespace Albums.Services
 {
   public class BiometricAuthenticationService : IBiometricAuthenticationService
   {
-    public void Authenticate(Action success, Action<string> onError)
+    public void Encrypt(byte[] input, Action<byte[]> success, Action<string> error)
     {
-      var builder = new BiometricPrompt.Builder(MainActivity.Activity)
-        .SetDescription("Authenticate with Biometrics!")
-        .SetTitle("TODO BIO")
-        .SetNegativeButton("Cancel", MainActivity.Activity.MainExecutor, new CancelClickListener())
-        .Build();
+      var prompt = BuildPrompt();
+      prompt.Authenticate(
+        _cryptoHelper.CreateCryptoObject(CipherMode.EncryptMode),
+        new CancellationSignal(),
+        MainActivity.Activity.MainExecutor,
+        new BiometricEncryptionCallback(input, success, error));
+    }
 
-      builder.Authenticate(new CancellationSignal(), MainActivity.Activity.MainExecutor, new BiometricAuthenticationCallback(success, onError));
+    public void Decrypt(byte[] input, Action<byte[]> success, Action<string> error)
+    {
+      var prompt = BuildPrompt();
+      prompt.Authenticate(
+        _cryptoHelper.CreateCryptoObject(CipherMode.DecryptMode),
+        new CancellationSignal(), 
+        MainActivity.Activity.MainExecutor,
+        new BiometricEncryptionCallback(input, success, error));
+    }
+
+    private BiometricPrompt BuildPrompt()
+    {
+      return new BiometricPrompt.Builder(MainActivity.Activity)
+                        .SetDescription("Authenticate with Biometrics!")
+                        .SetTitle("TODO BIO")
+                        .SetNegativeButton("Cancel", MainActivity.Activity.MainExecutor, new CancelClickListener())
+                        .Build();
     }
 
     private class CancelClickListener : Java.Lang.Object, IDialogInterfaceOnClickListener
@@ -36,17 +56,23 @@ namespace Albums.Services
       }
     }
 
-    private class BiometricAuthenticationCallback : BiometricPrompt.AuthenticationCallback
+    private class BiometricEncryptionCallback : BiometricPrompt.AuthenticationCallback
     {
-      public BiometricAuthenticationCallback(Action callback, Action<string> onError)
+      public BiometricEncryptionCallback(byte[] input, Action<byte[]> success, Action<string> error)
       {
-        _callback = callback;
-        _onError = onError;
+        _input = input;
+        _success = success;
+        _error = error;
       }
 
       public override void OnAuthenticationSucceeded(BiometricPrompt.AuthenticationResult result)
       {
-        _callback();
+        if (BiometricCryptoHelper.IV == null)
+        {
+          BiometricCryptoHelper.IV = result.CryptoObject.Cipher.GetIV();
+        }
+
+        _success(result.CryptoObject.Cipher.DoFinal(_input));
       }
 
       public override void OnAuthenticationFailed()
@@ -56,11 +82,14 @@ namespace Albums.Services
 
       public override void OnAuthenticationError([GeneratedEnum] BiometricErrorCode errorCode, ICharSequence errString)
       {
-        _onError(errString.ToString());
+        _error(errString.ToString());
       }
 
-      private readonly Action _callback;
-      private readonly Action<string> _onError;
+      private readonly byte[] _input;
+      private readonly Action<byte[]> _success;
+      private readonly Action<string> _error;
     }
+
+    private readonly BiometricCryptoHelper _cryptoHelper = new BiometricCryptoHelper();
   }
 }
