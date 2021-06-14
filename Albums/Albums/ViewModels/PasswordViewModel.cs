@@ -92,6 +92,7 @@ namespace Albums.ViewModels
       },
       (error) =>
       {
+        Show("Fingerprint Error", error);
         // Failed...
       });
     }
