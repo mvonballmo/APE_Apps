@@ -6,10 +6,10 @@ namespace Albums.Services
 {
   public interface IPasswordEncryptionService
   {
+    byte[] GenerateKey(string passphrase);
+
     byte[] Encrypt(byte[] input, byte[] key);
 
     byte[] Decrypt(byte[] input, byte[] key);
-
-    byte[] GenerateKey(string passphrase);
   }
 }
