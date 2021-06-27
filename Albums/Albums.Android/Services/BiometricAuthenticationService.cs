@@ -34,7 +34,7 @@ namespace Albums.Services
       var prompt = BuildPrompt();
       prompt.Authenticate(
         _cryptoHelper.CreateCryptoObject(CipherMode.DecryptMode),
-        new CancellationSignal(), 
+        new CancellationSignal(),
         MainActivity.Activity.MainExecutor,
         new BiometricEncryptionCallback(input, success, error));
     }

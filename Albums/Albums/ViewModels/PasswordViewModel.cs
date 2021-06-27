@@ -55,9 +55,7 @@ namespace Albums.ViewModels
       App.Services.GetInstance<IDialogService>().Show(title, message);
     }
 
-    private string _password;
     private string _textToEncrypt;
     private string _output;
-    private readonly IDialogService _dialogService;
   }
 }

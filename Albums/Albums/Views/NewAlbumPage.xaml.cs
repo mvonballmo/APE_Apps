@@ -11,8 +11,6 @@ namespace Albums.Views
 {
   public partial class NewAlbumPage : ContentPage
   {
-    private readonly IAlbumSaver _albumSaver;
-
     public Album Album { get; set; }
 
     public NewAlbumPage()
@@ -38,5 +36,7 @@ namespace Albums.Views
     {
       await Navigation.PopModalAsync();
     }
+
+    private readonly IAlbumSaver _albumSaver;
   }
 }

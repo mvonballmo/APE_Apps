@@ -50,9 +50,8 @@ namespace Albums.Droid.Security
         {
           cipher.Init(mode, key);
         }
-
       }
-      catch (KeyPermanentlyInvalidatedException ex)
+      catch (KeyPermanentlyInvalidatedException)
       {
         // TODO: The key was invalidated because the Biometric setup changed or a permanent lock out happened.
       }
@@ -62,8 +61,8 @@ namespace Albums.Droid.Security
 
     private void CreateKey()
     {
-      KeyGenerator keyGen = KeyGenerator.GetInstance(KeyProperties.KeyAlgorithmAes, KeyStoreName);
-      KeyGenParameterSpec keyGenSpec =
+      var keyGen = KeyGenerator.GetInstance(KeyProperties.KeyAlgorithmAes, KeyStoreName);
+      var keyGenSpec =
           new KeyGenParameterSpec.Builder(KeyAlias, KeyStorePurpose.Encrypt | KeyStorePurpose.Decrypt)
               .SetKeySize(256)
               .SetBlockModes(KeyProperties.BlockModeCbc)
@@ -74,8 +73,9 @@ namespace Albums.Droid.Security
       keyGen.GenerateKey();
     }
 
-    private readonly KeyStore _keystore;
     private const string KeyStoreName = "AndroidKeyStore";
     private const string KeyAlias = "_todoKey";
+
+    private readonly KeyStore _keystore;
   }
 }
