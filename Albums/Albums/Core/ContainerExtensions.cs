@@ -28,7 +28,7 @@ namespace Albums.Core
     {
       if (container is null) { throw new ArgumentNullException(nameof(container)); }
 
-      container.RegisterSingleton<IDataStore<Album>, AlbumMockDataStore>();
+      container.RegisterSingleton<IDataStore<Album>, SQLiteDataStore<Album>>();
       container.RegisterSingleton<IDialogService, DialogService>();
       container.RegisterSingleton<IAlbumSaver, AlbumSaver>();
 
