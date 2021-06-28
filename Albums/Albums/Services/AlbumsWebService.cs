@@ -17,9 +17,11 @@ namespace Albums.Services
   /// </summary>
   public class AlbumsWebService : IWebService<Album>
   {
-    public AlbumsWebService(HttpClient client)
+    public AlbumsWebService(IHttpClientFactory clientFactory)
     {
-      _client = client ?? throw new ArgumentNullException(nameof(client));
+      if (clientFactory == null) { throw new ArgumentNullException(nameof(clientFactory)); }
+
+      _client = clientFactory.CreateClient();
 
       // Set a base-address so we don't need to repeat ourselves.
       _client.BaseAddress = new Uri("http://localhost:3000");

@@ -33,7 +33,7 @@ namespace Albums.Core
       container.RegisterSingleton<IDialogService, DialogService>();
       container.RegisterSingleton<IAlbumSaver, AlbumSaver>();
       container.RegisterSingleton<IWebService<Album>, AlbumsWebService>();
-      container.Register(() => new HttpClient());
+      container.RegisterSingleton<IHttpClientFactory, HttpClientFactory>();
 
       return container;
     }
