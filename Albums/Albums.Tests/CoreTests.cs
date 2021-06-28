@@ -2,6 +2,7 @@
 //   Copyright (c) 2021 Marco von Ballmoos. All rights reserved.
 // </copyright>
 
+using System.Linq;
 using System.Threading.Tasks;
 using Albums.Core;
 using Albums.Models;
@@ -56,6 +57,17 @@ namespace Albums.Tests
 
       Assert.That(await albumSaver.TrySaveAsync(album), "Album should have been saved.");
       A.CallTo(() => dialogService.Show(A<string>.Ignored, A<string>.Ignored)).MustNotHaveHappened();
+    }
+
+    [Test]
+    public async Task TestAlbumWebServiceGet()
+    {
+      var container = CreateContainer(out var _);
+      var webService = container.GetInstance<IWebService<Album>>();
+
+      var albums = await webService.Get();
+
+      Assert.That(albums.Count(), Is.EqualTo(6));
     }
 
     private static Container CreateContainer(out IDialogService dialogService)
