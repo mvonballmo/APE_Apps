@@ -3,6 +3,7 @@
 // </copyright>
 
 using System;
+using System.Net.Http;
 using Albums.Models;
 using Albums.Services;
 using JetBrains.Annotations;
@@ -28,9 +29,11 @@ namespace Albums.Core
     {
       if (container is null) { throw new ArgumentNullException(nameof(container)); }
 
-      container.RegisterSingleton<IDataStore<Album>, SQLiteDataStore<Album>>();
+      container.RegisterSingleton<IDataStore<Album>, AlbumsDataStore>();
       container.RegisterSingleton<IDialogService, DialogService>();
       container.RegisterSingleton<IAlbumSaver, AlbumSaver>();
+      container.RegisterSingleton<IWebService<Album>, AlbumsWebService>();
+      container.Register(() => new HttpClient());
 
       return container;
     }
