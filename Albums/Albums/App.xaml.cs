@@ -3,6 +3,8 @@
 // </copyright>
 
 using Albums.Core;
+using Albums.Models;
+using Albums.Services;
 using Albums.Views;
 using SimpleInjector;
 using Xamarin.Forms;
@@ -20,6 +22,10 @@ namespace Albums
 
       Services = ContainerExtensions.CreateContainer();
       Services.RegisterInstance<Page>(navigationPage);
+
+      var dataStore = Services.GetInstance<IDataStore<Album>>();
+
+      dataStore.Initialize();
 
       MainPage = navigationPage;
     }

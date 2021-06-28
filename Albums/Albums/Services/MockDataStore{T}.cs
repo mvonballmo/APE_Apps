@@ -12,7 +12,10 @@ namespace Albums.Services
   public class MockDataStore<T> : IDataStore<T>
     where T : UniqueItem
   {
-    protected List<T> Items { get; set; }
+    public Task Initialize()
+    {
+      return Task.CompletedTask;
+    }
 
     public async Task<bool> AddItemAsync(T item)
     {
@@ -47,5 +50,7 @@ namespace Albums.Services
     {
       return await Task.FromResult(Items);
     }
+
+    protected List<T> Items { get; set; }
   }
 }

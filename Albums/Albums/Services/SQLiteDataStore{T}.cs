@@ -17,51 +17,44 @@ namespace Albums.Services
     public SQLiteDataStore()
     {
       var options = new SQLiteConnectionString(DatabasePath);
-      _connection = new SQLiteConnection(options);
+      _connection = new SQLiteAsyncConnection(options);
+    }
 
+    public async Task Initialize()
+    {
       // Check whether our table already exists. If not, we're creating it here.
       if (_connection.TableMappings.All(x => !x.TableName.Equals(typeof(T).Name, StringComparison.InvariantCultureIgnoreCase)))
       {
-        _connection.CreateTable<T>();
+        await _connection.CreateTableAsync<T>();
       }
     }
 
-    public Task<bool> AddItemAsync(T item)
+    public async Task<bool> AddItemAsync(T item)
     {
-      var itemInsertedCount = _connection.Insert(item);
-
-      return Task.FromResult(itemInsertedCount == 1);
+      return await _connection.InsertAsync(item) == 1;
     }
 
-    public Task<bool> DeleteItemAsync(string id)
+    public async Task<bool> DeleteItemAsync(string id)
     {
-      var itemDeletedCount = _connection.Delete<T>(id);
-
-      return Task.FromResult(itemDeletedCount == 1);
+      return await _connection.DeleteAsync<T>(id) == 1;
     }
 
     public Task<T> GetItemAsync(string id)
     {
-      var result = _connection.Get<T>(id);
-
-      return Task.FromResult(result);
+      return _connection.GetAsync<T>(id);
     }
 
-    public Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false)
+    public async Task<IEnumerable<T>> GetItemsAsync(bool forceRefresh = false)
     {
-      IEnumerable<T> allItems = _connection.Table<T>().ToList();
-
-      return Task.FromResult(allItems);
+      return await _connection.Table<T>().ToListAsync();
     }
 
-    public Task<bool> UpdateItemAsync(T item)
+    public async Task<bool> UpdateItemAsync(T item)
     {
-      var itemUpdatedCount = _connection.Update(item);
-
-      return Task.FromResult(itemUpdatedCount == 1);
+      return await _connection.UpdateAsync(item) == 1;
     }
 
-    private SQLiteConnection _connection;
+    private SQLiteAsyncConnection _connection;
 
     /// <summary>
     /// Gets the static path to the database. The <see cref="Environment.SpecialFolder"/> is used to resolve the right path.
