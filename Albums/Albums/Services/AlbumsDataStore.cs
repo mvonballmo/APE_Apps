@@ -9,8 +9,6 @@ namespace Albums.Services
 {
   public class AlbumsDataStore : SQLiteDataStore<Album>
   {
-    private readonly IWebService<Album> _albumsWebService;
-
     public AlbumsDataStore(IWebService<Album> albumsWebService)
     {
       _albumsWebService = albumsWebService;
@@ -24,5 +22,7 @@ namespace Albums.Services
 
       await Connection.InsertAllAsync(initialAlbums);
     }
+
+    private readonly IWebService<Album> _albumsWebService;
   }
 }
