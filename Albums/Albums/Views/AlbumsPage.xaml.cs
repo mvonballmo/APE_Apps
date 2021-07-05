@@ -3,7 +3,9 @@
 // </copyright>
 
 using System;
+using System.Threading.Tasks;
 using Albums.Models;
+using Albums.Services;
 using Albums.ViewModels;
 using Xamarin.Forms;
 
@@ -38,6 +40,13 @@ namespace Albums.Views
       {
         _viewModel.IsBusy = true;
       }
+    }
+
+    private async void LoadFromServerClickedAsync(object sender, System.EventArgs e)
+    {
+      var dataStore = App.Services.GetInstance<IDataStore<Album>>();
+
+      await dataStore.Initialize();
     }
 
     private readonly AlbumsViewModel _viewModel;
