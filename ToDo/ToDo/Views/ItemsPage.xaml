@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:ToDo.ViewModels"
-             x:DataType="viewmodels:ItemsViewModel"
+             xmlns:viewmodels="clr-namespace:ToDo"
+             x:DataType="viewmodels:ViewModels.ItemsViewModel"
              x:Class="ToDo.Views.ItemsPage"
              Title="{Binding Title}"
              x:Name="BrowseItemsPage">
@@ -15,7 +15,7 @@
         <CollectionView x:Name="ItemsCollectionView"
                 ItemsSource="{Binding Items}">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="viewmodels:Models.Item">
                     <StackLayout Padding="10">
                         <Label Text="{Binding Text}" 
                                 LineBreakMode="NoWrap" 
