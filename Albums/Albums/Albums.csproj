@@ -16,8 +16,12 @@
     <PackageReference Include="SimpleInjector" Version="5.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Core\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="System.Data.SqlClient" />
   </ItemGroup>
 </Project>
