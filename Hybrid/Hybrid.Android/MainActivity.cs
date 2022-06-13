@@ -31,6 +31,8 @@ namespace Hybrid.Droid
       webView.Settings.JavaScriptEnabled = true;
       webView.AddJavascriptInterface(new JavaScriptInject(this, webView), "Native");
 
+      WebView.SetWebContentsDebuggingEnabled(true);
+
       // Load a local HTML file.
       webView.LoadUrl("file:///android_asset/index.html");
     }
