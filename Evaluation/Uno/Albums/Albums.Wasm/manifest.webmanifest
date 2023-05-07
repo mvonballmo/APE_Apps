@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "Albums",
+  "display": "standalone",
+  "name": "Albums",
+  "short_name": "Albums",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}

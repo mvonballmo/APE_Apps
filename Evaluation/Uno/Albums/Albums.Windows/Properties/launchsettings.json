@@ -1,0 +1,10 @@
+{
+  "profiles": {
+	"Albums.Windows (Package)": {
+	  "commandName": "MsixPackage"
+	},
+	"Albums.Windows (Unpackaged)": {
+	  "commandName": "Project"
+	}
+  }
+}

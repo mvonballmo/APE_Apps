@@ -1,0 +1,15 @@
+{
+  "solution": {
+    "path": "Albums.sln",
+    "projects": [
+      "Albums.Tests\\Albums.Tests.csproj",
+      "Albums.UITests\\Albums.UITests.csproj",
+      "Albums.Mobile\\Albums.Mobile.csproj",
+      "Albums.Skia.Gtk\\Albums.Skia.Gtk.csproj",
+      "Albums.Wasm\\Albums.Wasm.csproj",
+      "Albums.Server\\Albums.Server.csproj",
+      "Albums.DataContracts\\Albums.DataContracts.csproj",
+      "Albums\\Albums.csproj"
+    ]
+  }
+}
