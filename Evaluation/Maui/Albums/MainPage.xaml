@@ -35,7 +35,8 @@
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center"
                 MinimumWidthRequest="200"
-                BackgroundColor="Crimson"/>
+                BackgroundColor="Blue"
+                FontSize="28"/>
 
         </VerticalStackLayout>
     </ScrollView>
