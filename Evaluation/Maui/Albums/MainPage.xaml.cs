@@ -4,12 +4,7 @@ namespace Albums;
 
 public partial class MainPage : ContentPage
 {
-	private CounterService counterService;// = new();
-
-    public MainPage()
-    {
-        InitializeComponent();
-    }
+	private CounterService counterService;
 
     public MainPage(CounterService counterService)
 	{

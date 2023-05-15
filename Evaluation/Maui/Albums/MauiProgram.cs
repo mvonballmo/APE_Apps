@@ -27,6 +27,7 @@ public static class MauiProgram
 	private static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
 	{
 		builder.Services.AddSingleton<CounterService>();
+		builder.Services.AddTransient<MainPage>();
 
         return builder;
 	}
