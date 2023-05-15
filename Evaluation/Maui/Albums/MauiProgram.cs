@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Albums.Core;
+using Microsoft.Extensions.Logging;
 
 namespace Albums;
 
@@ -9,6 +10,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.RegisterServices()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -20,5 +22,12 @@ public static class MauiProgram
 #endif
 
 		return builder.Build();
+	}
+
+	private static MauiAppBuilder RegisterServices(this MauiAppBuilder builder)
+	{
+		builder.Services.AddSingleton<CounterService>();
+
+        return builder;
 	}
 }

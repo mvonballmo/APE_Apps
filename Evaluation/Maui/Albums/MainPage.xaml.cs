@@ -4,11 +4,18 @@ namespace Albums;
 
 public partial class MainPage : ContentPage
 {
-	private CounterService counterService = new();
+	private CounterService counterService;// = new();
 
-	public MainPage()
+    public MainPage()
+    {
+        InitializeComponent();
+    }
+
+    public MainPage(CounterService counterService)
 	{
 		InitializeComponent();
+
+		this.counterService = counterService;
 	}
 
 	private void OnCounterClicked(object sender, EventArgs e)
