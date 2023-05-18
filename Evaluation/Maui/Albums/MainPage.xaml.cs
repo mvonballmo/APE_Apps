@@ -1,22 +1,23 @@
 ﻿namespace Albums;
 
+using Albums.Core;
+
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+	private readonly CounterService counterService;
 
-	public MainPage()
+	public MainPage(CounterService counterService)
 	{
 		InitializeComponent();
+
+		this.counterService = counterService;
 	}
 
 	private void OnCounterClicked(object sender, EventArgs e)
 	{
-		count++;
+		counterService.Increment();
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+		CounterBtn.Text = counterService.GetLabel();
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
 	}

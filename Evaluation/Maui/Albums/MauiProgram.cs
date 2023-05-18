@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Albums.Core;
+using Microsoft.Extensions.Logging;
 
 namespace Albums;
 
@@ -19,6 +20,9 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
-		return builder.Build();
+		builder.Services.AddServices();
+        builder.Services.AddSingleton<MainPage>();
+
+        return builder.Build();
 	}
 }
