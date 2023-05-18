@@ -5,7 +5,7 @@ namespace Albums.Core.Tests;
 public class CounterServiceTests
 {
     [Test]
-    public void Test1()
+    public void TestGetLabel()
     {
         var provider = CreateProvider();
         var counterService = provider.GetRequiredService<CounterService>();
