@@ -8,7 +8,7 @@ public class CounterServiceTests
     public void TestGetLabel()
     {
         var provider = CreateProvider();
-        var counterService = provider.GetRequiredService<CounterService>();
+        var counterService = provider.GetRequiredService<ICounterService>();
 
         Assert.That(counterService.GetLabel(), Is.EqualTo("Clicked 0 times"));
 

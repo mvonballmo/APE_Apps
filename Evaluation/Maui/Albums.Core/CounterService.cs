@@ -1,22 +1,17 @@
 ﻿namespace Albums;
 
-public class SubService
-{
-
-}
-
-public class CounterService
+public class CounterService : ICounterService
 {
     int count = 0;
-    private readonly SubService subService;
+    private readonly ISubService subService;
 
-    public CounterService(SubService subService)
+    public CounterService(ISubService subService)
     {
         this.subService = subService;
     }
 
-	public void Increment()
-	{
+    public void Increment()
+    {
         count += 1;
     }
 
