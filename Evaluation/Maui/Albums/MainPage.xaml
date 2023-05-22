@@ -38,6 +38,16 @@
                 BackgroundColor="Blue"
                 FontSize="28"/>
 
+            <Button
+                x:Name="DialogBtn"
+                Text="Alert"
+                SemanticProperties.Hint="Shows a dialog box"
+                Clicked="DialogBtnClicked"
+                HorizontalOptions="Center"
+                MinimumWidthRequest="200"
+                BackgroundColor="Blue"
+                FontSize="28"/>
+
         </VerticalStackLayout>
     </ScrollView>
 

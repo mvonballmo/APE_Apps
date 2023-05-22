@@ -8,7 +8,7 @@ public static class ServiceExtensions
     {   
         return serviceCollection
             .AddSingleton<ICounterService, CounterService>()
-            .AddSingleton<ISubService, SubService>();
+            .AddSingleton<ICounterState, CounterState>();
     }
 }
 

@@ -2,24 +2,23 @@
 
 public class CounterService : ICounterService
 {
-    int count = 0;
-    private readonly ISubService subService;
+    private readonly ICounterState state;
 
-    public CounterService(ISubService subService)
+    public CounterService(ICounterState state)
     {
-        this.subService = subService;
+        this.state = state;
     }
 
     public void Increment()
     {
-        count += 1;
+        state.Count += 1;
     }
 
     public string GetLabel()
     {
-        string countLabel = count == 1 ? "time" : "times";
+        string countLabel = state.Count == 1 ? "time" : "times";
 
-        return $"Clicked {count} {countLabel}";
+        return $"Clicked {state.Count} {countLabel}";
     }
 }
 
