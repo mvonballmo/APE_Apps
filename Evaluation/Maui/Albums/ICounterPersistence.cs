@@ -1,6 +1,6 @@
 ﻿namespace Albums
 {
-  internal interface ICounterPersistence
+  public interface ICounterPersistence
   {
     void Save(ICounterState state);
   }

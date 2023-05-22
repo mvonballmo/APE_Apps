@@ -42,7 +42,27 @@
                 x:Name="DialogBtn"
                 Text="Alert"
                 SemanticProperties.Hint="Shows a dialog box"
-                Clicked="DialogBtnClicked"
+                Clicked="SaveClicked"
+                HorizontalOptions="Center"
+                MinimumWidthRequest="200"
+                BackgroundColor="Blue"
+                FontSize="28"/>
+
+            <Button
+                x:Name="DialogBtn2"
+                Text="Alert"
+                SemanticProperties.Hint="Shows a dialog box"
+                Clicked="SaveClicked"
+                HorizontalOptions="Center"
+                MinimumWidthRequest="200"
+                BackgroundColor="Blue"
+                FontSize="28"/>
+
+            <Button
+                x:Name="DialogBtn3"
+                Text="Alert"
+                SemanticProperties.Hint="Shows a dialog box"
+                Clicked="SaveClicked"
                 HorizontalOptions="Center"
                 MinimumWidthRequest="200"
                 BackgroundColor="Blue"
