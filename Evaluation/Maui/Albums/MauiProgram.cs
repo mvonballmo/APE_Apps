@@ -22,7 +22,7 @@ public static class MauiProgram
 
     builder.Services.AddServices();
     builder.Services.AddSingleton<MainPage>();
-    builder.Services.AddSingleton<IDialogService, DialogService>();
+    builder.Services.AddTransient<IDialogService, DialogService>();
     builder.Services.AddSingleton<ICounterPersistence, CounterPersistence>();
 
     return builder.Build();

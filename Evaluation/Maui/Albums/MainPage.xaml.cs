@@ -11,6 +11,11 @@ public partial class MainPage : ContentPage
   {
     InitializeComponent();
 
+    if (dialogService is DialogService concreteInstance)
+    {
+      concreteInstance.Page = this;
+    }
+
     this.counterService = counterService;
     this.state = state;
     this.dialogService = dialogService;
@@ -28,7 +33,7 @@ public partial class MainPage : ContentPage
 
   async void SaveClicked(Object sender, EventArgs e)
   {
-    var answer = await dialogService.AskAsync(this, "This is the alert");
+    var answer = await dialogService.AskAsync("This is the alert");
 
     // runs AFTER the user answers
 
@@ -36,11 +41,11 @@ public partial class MainPage : ContentPage
     {
       persistence.Save(state);
 
-      await dialogService.Show(this, "Document saved.");
+      await dialogService.Show("Document saved.");
     }
     else
     {
-      await dialogService.Show(this, "Document NOT saved.");
+      await dialogService.Show("Document NOT saved.");
     }
   }
 }

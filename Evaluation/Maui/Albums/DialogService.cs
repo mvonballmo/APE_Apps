@@ -2,13 +2,15 @@
 
 public class DialogService : IDialogService
 {
-  public Task<bool> AskAsync(Page page, string message)
+  public MainPage? Page { get; internal set; }
+
+  public Task<bool> AskAsync(string message)
   {
-    return page.DisplayAlert("Confirm", message, "Yes", "No");
+    return Page!.DisplayAlert("Confirm", message, "Yes", "No");
   }
 
-  public Task Show(Page page, string message)
+  public Task Show(string message)
   {
-    return page.DisplayAlert("Message", message, "OK");
+    return Page!.DisplayAlert("Message", message, "OK");
   }
 }
