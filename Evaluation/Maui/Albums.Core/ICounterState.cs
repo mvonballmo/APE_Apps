@@ -1,4 +1,4 @@
-﻿namespace Albums
+﻿namespace Albums.Core
 {
     public interface ICounterState
     {

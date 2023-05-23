@@ -1,4 +1,4 @@
-﻿namespace Albums;
+﻿namespace Albums.Core;
 
 public class CounterState : ICounterState
 {

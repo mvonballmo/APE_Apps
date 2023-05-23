@@ -1,4 +1,5 @@
-﻿using CoreBluetooth;
+﻿using Albums.Core;
+using CoreBluetooth;
 
 namespace Albums
 {

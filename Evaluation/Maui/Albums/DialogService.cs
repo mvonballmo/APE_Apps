@@ -1,4 +1,6 @@
-﻿namespace Albums;
+﻿using Albums.Core;
+
+namespace Albums;
 
 public class DialogService : IDialogService
 {
