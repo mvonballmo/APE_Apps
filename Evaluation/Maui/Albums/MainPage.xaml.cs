@@ -23,9 +23,9 @@ public partial class MainPage : ContentPage
   {
     counterService.Increment();
 
-    CounterBtn.Text = counterService.GetLabel();
-
-    SemanticScreenReader.Announce(CounterBtn.Text);
+    // CounterBtn.Text = counterService.GetLabel();
+    //
+    // SemanticScreenReader.Announce(CounterBtn.Text);
   }
 
   async void SaveClicked(Object sender, EventArgs e)
