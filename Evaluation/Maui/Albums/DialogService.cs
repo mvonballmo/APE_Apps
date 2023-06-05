@@ -16,6 +16,11 @@ public class DialogService : IDialogService
 
   private static Page GetMainPage()
   {
-    return Application.Current!.MainPage!;
+    if (Application.Current != null && Application.Current.MainPage != null)
+    {
+      return Application.Current.MainPage;
+    }
+
+    throw new InvalidOperationException("DialogService.MainPage cannot be null.");
   }
 }
