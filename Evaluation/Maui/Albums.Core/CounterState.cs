@@ -2,6 +2,5 @@
 
 public class CounterState : ICounterState
 {
-    public int Count { get; set; }
+  public int Count { get; set; }
 }
-

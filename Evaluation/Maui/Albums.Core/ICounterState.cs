@@ -1,7 +1,7 @@
 ﻿namespace Albums.Core
 {
-    public interface ICounterState
-    {
-        public int Count { get; set; }
-    }
+  public interface ICounterState
+  {
+    public int Count { get; set; }
+  }
 }
