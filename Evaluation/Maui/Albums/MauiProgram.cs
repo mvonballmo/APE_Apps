@@ -21,7 +21,6 @@ public static class MauiProgram
 #endif
 
     builder.Services.AddServices();
-    builder.Services.AddSingleton<MainPage>();
     builder.Services.AddTransient<IDialogService, DialogService>();
     builder.Services.AddSingleton<ICounterPersistence, CounterPersistence>();
 
