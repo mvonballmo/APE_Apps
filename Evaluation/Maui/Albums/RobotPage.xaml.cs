@@ -2,14 +2,14 @@
 
 namespace Albums;
 
-public partial class MainPage : ContentPage
+public partial class RobotPage : ContentPage
 {
   private readonly ICounterService counterService;
   private readonly ICounterState state;
   private readonly ICounterPersistence persistence;
   private readonly IDialogService dialogService;
 
-  public MainPage(ICounterService counterService, ICounterState state, IDialogService dialogService, ICounterPersistence persistence)
+  public RobotPage(ICounterService counterService, ICounterState state, IDialogService dialogService, ICounterPersistence persistence)
   {
     InitializeComponent();
 
