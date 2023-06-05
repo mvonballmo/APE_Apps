@@ -13,11 +13,6 @@ public partial class MainPage : ContentPage
   {
     InitializeComponent();
 
-    if (dialogService is DialogService concreteInstance)
-    {
-      concreteInstance.Page = this;
-    }
-
     this.counterService = counterService;
     this.state = state;
     this.dialogService = dialogService;
