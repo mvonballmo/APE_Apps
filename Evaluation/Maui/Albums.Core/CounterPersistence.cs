@@ -1,10 +1,7 @@
-﻿using Albums.Core;
-using CoreBluetooth;
-
-namespace Albums
+﻿namespace Albums.Core
 {
-  internal class CounterPersistence : ICounterPersistence
-  { 
+  public class CounterPersistence : ICounterPersistence
+  {
     public void Save(ICounterState state)
     {
       //var answer = await DisplayAlert("Alert", "This is the alert", "OK", "Cancel");
