@@ -28,21 +28,8 @@ public partial class RobotPage : ContentPage
     SemanticScreenReader.Announce(CounterBtn.Text);
   }
 
-  async void SaveClicked(Object sender, EventArgs e)
+  private async void SaveClicked(object sender, EventArgs e)
   {
-    var answer = await dialogService.AskAsync("This is the alert");
-
-    // runs AFTER the user answers
-
-    if (answer)
-    {
-      persistence.Save(state);
-
-      await dialogService.Show("Document saved.");
-    }
-    else
-    {
-      await dialogService.Show("Document NOT saved.");
-    }
+    await persistence.Save(state);
   }
 }

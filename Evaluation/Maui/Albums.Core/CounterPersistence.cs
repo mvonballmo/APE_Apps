@@ -2,13 +2,29 @@
 {
   public class CounterPersistence : ICounterPersistence
   {
-    public void Save(ICounterState state)
+    private readonly IDialogService _dialogService;
+
+    public CounterPersistence(IDialogService dialogService)
     {
-      //var answer = await DisplayAlert("Alert", "This is the alert", "OK", "Cancel");
+      _dialogService = dialogService;
+    }
 
-      // TODO Hook up logging for Maui
+    public async Task Save(ICounterState state)
+    {
+      var answer = await _dialogService.AskAsync("This is the alert");
 
-      Console.WriteLine("Test");
+      if (answer)
+      {
+        Console.WriteLine("Test");
+
+        // TODO Hook up logging for Maui
+
+        await _dialogService.Show("Document saved.");
+      }
+      else
+      {
+        await _dialogService.Show("Document NOT saved.");
+      }
     }
   }
 }
