@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:albums="clr-namespace:Albums"
+             x:Class="Albums.ClockPage">
+  <ContentPage.BindingContext>
+    <albums:ClockViewModel />
+  </ContentPage.BindingContext>
+
+  <ScrollView>
+
+    <VerticalStackLayout Spacing="25" Padding="30,0"
+                         VerticalOptions="Center" HorizontalOptions="Center">
+
+      <Label Text="{Binding Minute, StringFormat='The minute is {0}'}" />
+      <Label Text="{Binding DateTime, StringFormat='The month is {0:MMMM}'}" />
+      <Label Text="{Binding DateTime.Day, StringFormat='The day is {0}'}" />
+      <Label Text="{Binding DateTime, StringFormat='The time is {0:T}'}" />
+
+    </VerticalStackLayout>
+  </ScrollView>
+
+</ContentPage>
