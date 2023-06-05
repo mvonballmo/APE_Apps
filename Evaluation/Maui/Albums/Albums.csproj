@@ -59,12 +59,4 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Albums.Core\Albums.Core.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <None Remove=".markdownlint.json" />
-	  <None Remove=".stylecop.json" />
-	</ItemGroup>
-	<ItemGroup>
-	  <BundleResource Include=".markdownlint.json" />
-	  <BundleResource Include=".stylecop.json" />
-	</ItemGroup>
 </Project>

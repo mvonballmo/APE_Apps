@@ -15,7 +15,7 @@
     },
     "documentationRules": {
       "companyName": "Marco von Ballmoos",
-      "copyrightText": "  Copyright (c) 2021 {companyName}. All rights reserved.",
+      "copyrightText": "  Copyright (c) 2023 {companyName}. All rights reserved.",
       "xmlHeader": true,
       "documentInterfaces": true,
       "documentExposedElements": true,
