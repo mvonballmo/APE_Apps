@@ -2,7 +2,7 @@
 
 namespace Albums.Core.Tests;
 
-public class CounterServiceTests
+public class CounterServiceTests : TestsBase
 {
   [Test]
   public void TestGetLabel()
@@ -19,12 +19,5 @@ public class CounterServiceTests
     counterService.Increment();
 
     Assert.That(counterService.GetLabel(), Is.EqualTo("Clicked 2 times"));
-  }
-
-  private static IServiceProvider CreateProvider()
-  {
-    return new ServiceCollection()
-      .AddServices()
-      .BuildServiceProvider();
   }
 }

@@ -8,6 +8,7 @@ public static class ServiceExtensions
   {
     return serviceCollection
       .AddSingleton<ICounterService, CounterService>()
+      .AddSingleton<ICounterPersistence, CounterPersistence>()
       .AddSingleton<ICounterState, CounterState>();
   }
 }
