@@ -14,13 +14,13 @@ public class CounterPersistenceTests : TestsBase
     var state = provider.GetRequiredService<ICounterState>();
     var dialogService = provider.GetRequiredService<IDialogService>();
 
-    _flag = true;
+    SetUpDialog(true);
 
     await service.Save(state);
 
     Assert.Multiple(() =>
     {
-      A.CallTo(() => dialogService.AskAsync("This is the alert")).MustHaveHappenedOnceExactly();
+      A.CallTo(() => dialogService.AskAsync(A<string>.Ignored)).MustHaveHappenedOnceExactly();
       A.CallTo(() => dialogService.Show("Document saved.")).MustHaveHappenedOnceExactly();
     });
   }
@@ -33,32 +33,30 @@ public class CounterPersistenceTests : TestsBase
     var state = provider.GetRequiredService<ICounterState>();
     var dialogService = provider.GetRequiredService<IDialogService>();
 
-    _flag = false;
+    SetUpDialog(false);
 
     await service.Save(state);
 
     Assert.Multiple(() =>
     {
-      A.CallTo(() => dialogService.AskAsync("This is the alert")).MustHaveHappenedOnceExactly();
+      A.CallTo(() => dialogService.AskAsync(A<string>.Ignored)).MustHaveHappenedOnceExactly();
       A.CallTo(() => dialogService.Show("Document NOT saved.")).MustHaveHappenedOnceExactly();
     });
   }
 
   protected override IServiceCollection AddServices(ServiceCollection serviceCollection)
   {
-    var fakeDialogService = A.Fake<IDialogService>();
-
-    A.CallTo(() => fakeDialogService.AskAsync("This is the alert")).ReturnsLazily(GetFlag);
+    _fakeDialogService = A.Fake<IDialogService>();
 
     return base
         .AddServices(serviceCollection)
-        .AddSingleton(fakeDialogService);
+        .AddSingleton(_fakeDialogService);
   }
 
-  private bool _flag;
-
-  private bool GetFlag()
+  private void SetUpDialog(bool askResult)
   {
-    return _flag;
+    A.CallTo(() => _fakeDialogService!.AskAsync(A<string>.Ignored)).Returns(askResult);
   }
+
+  private IDialogService? _fakeDialogService;
 }

@@ -11,7 +11,7 @@
 
     public async Task Save(ICounterState state)
     {
-      var answer = await _dialogService.AskAsync("This is the alert");
+      var answer = await _dialogService.AskAsync("Would you like to save the object?");
 
       if (answer)
       {

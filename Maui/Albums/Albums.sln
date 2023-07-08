@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Albums", "Albums.csproj", "{201F640C-366C-40CD-80AF-FE7DD9D458A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Albums", "Albums\Albums.csproj", "{201F640C-366C-40CD-80AF-FE7DD9D458A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Albums.Core.Tests", "..\Albums.Core.Tests\Albums.Core.Tests.csproj", "{749FA3F1-E7F9-4661-A98F-AE3CBEEFE227}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Albums.Core.Tests", "Albums.Core.Tests\Albums.Core.Tests.csproj", "{749FA3F1-E7F9-4661-A98F-AE3CBEEFE227}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Albums.Core", "..\Albums.Core\Albums.Core.csproj", "{A3AA81DB-C37A-48FD-8018-F80825ADEAFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Albums.Core", "Albums.Core\Albums.Core.csproj", "{A3AA81DB-C37A-48FD-8018-F80825ADEAFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
