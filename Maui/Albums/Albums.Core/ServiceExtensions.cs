@@ -9,6 +9,10 @@ public static class ServiceExtensions
     return serviceCollection
       .AddSingleton<ICounterService, CounterService>()
       .AddSingleton<ICounterPersistence, CounterPersistence>()
-      .AddSingleton<ICounterState, CounterState>();
+      .AddSingleton<ICounterState, CounterState>()
+      .AddSingleton<IConnectivityChecker, ConnectivityChecker>()
+      .AddSingleton<IHttpSettings, HttpSettings>()
+      .AddSingleton<IHttpClientManager, HttpClientManager>()
+      .AddSingleton<IAlbumManager, AlbumManager>();
   }
 }

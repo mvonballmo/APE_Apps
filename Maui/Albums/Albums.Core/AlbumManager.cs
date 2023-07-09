@@ -4,15 +4,45 @@ using PartsClient.Data;
 
 namespace Albums.Core
 {
-  public static class AlbumManager
+  public interface IConnectivityChecker
+  {
+    public bool Connected { get; }
+  }
+
+  internal class ConnectivityChecker : IConnectivityChecker
+  {
+    public bool Connected => Connectivity.Current.NetworkAccess != NetworkAccess.Internet;
+  }
+
+  public interface IHttpClientManager
+  {
+    Task<HttpClient> GetClient();
+  }
+
+  public interface IHttpSettings
+  {
+    public string Url { get; }
+  }
+
+  internal class HttpSettings : IHttpSettings
   {
     private const string BaseAddress = "https://localhost:3000";
-    private const string Url = $"{BaseAddress}/api/";
+
+    public string Url { get; } = $"{BaseAddress}/api/";
+  }
+
+  internal class HttpClientManager : IHttpClientManager
+  {
+    private readonly IHttpSettings _httpSettings;
     private static string? _authorizationKey;
+    private static HttpClient? _client;
 
-    static HttpClient? _client;
+    public HttpClientManager(IHttpSettings httpSettings)
+    {
+      _httpSettings = httpSettings;
+    }
 
-    private static async Task<HttpClient> GetClient()
+    public async Task<HttpClient> GetClient()
     {
       if (_client != null)
         return _client;
@@ -21,7 +51,7 @@ namespace Albums.Core
 
       if (string.IsNullOrEmpty(_authorizationKey))
       {
-        _authorizationKey = await _client.GetStringAsync($"{Url}login");
+        _authorizationKey = await _client.GetStringAsync($"{_httpSettings.Url}login");
         _authorizationKey = JsonConvert.DeserializeObject<string>(_authorizationKey);
       }
 
@@ -30,19 +60,44 @@ namespace Albums.Core
 
       return _client;
     }
+  }
 
-    public static async Task<IEnumerable<Part>> GetAll()
+  public interface IAlbumManager
+  {
+    Task<IEnumerable<Part>> GetAll();
+
+    Task<Part> Add(string partName, string supplier, string partType);
+
+    Task Update(Part part);
+
+    Task Delete(string partId);
+  }
+
+  public class AlbumManager : IAlbumManager
+  {
+    private readonly IHttpClientManager _httpClientManager;
+    private readonly IHttpSettings _httpSettings;
+    private readonly IConnectivityChecker _connectivityChecker;
+
+    public AlbumManager(IHttpClientManager httpClientManager, IHttpSettings httpSettings, IConnectivityChecker connectivityChecker)
+    {
+      _httpClientManager = httpClientManager;
+      _httpSettings = httpSettings;
+      _connectivityChecker = connectivityChecker;
+    }
+
+    public async Task<IEnumerable<Part>> GetAll()
     {
       if (!IsConnected())
         return new List<Part>();
 
-      var client = await GetClient();
-      var result = await client.GetStringAsync($"{Url}parts");
+      var client = await _httpClientManager.GetClient();
+      var result = await client.GetStringAsync($"{_httpSettings.Url}parts");
 
       return JsonConvert.DeserializeObject<List<Part>>(result);
     }
 
-    public static async Task<Part> Add(string partName, string supplier, string partType)
+    public async Task<Part> Add(string partName, string supplier, string partType)
     {
       if (!IsConnected())
         return new Part();
@@ -59,11 +114,12 @@ namespace Albums.Core
         PartAvailableDate = DateTime.Now.Date
       };
 
-      var msg = new HttpRequestMessage(HttpMethod.Post, $"{Url}parts");
+      var msg = new HttpRequestMessage(HttpMethod.Post, $"{_httpSettings.Url}parts");
 
       msg.Content = JsonContent.Create<Part>(part);
 
-      var response = await _client.SendAsync(msg);
+      var client = await _httpClientManager.GetClient();
+      var response = await client.SendAsync(msg);
       response.EnsureSuccessStatusCode();
 
       var returnedJson = await response.Content.ReadAsStringAsync();
@@ -73,31 +129,31 @@ namespace Albums.Core
       return insertedPart;
     }
 
-    public static async Task Update(Part part)
+    public async Task Update(Part part)
     {
       if (!IsConnected())
         return;
 
-      HttpRequestMessage msg = new(HttpMethod.Put, $"{Url}parts/{part.PartID}");
+      HttpRequestMessage msg = new(HttpMethod.Put, $"{_httpSettings.Url}parts/{part.PartID}");
       msg.Content = JsonContent.Create<Part>(part);
-      var client = await GetClient();
+      var client = await _httpClientManager.GetClient();
       var response = await client.SendAsync(msg);
       response.EnsureSuccessStatusCode();
     }
 
-    public static async Task Delete(string partId)
+    public async Task Delete(string partId)
     {
       if (!IsConnected())
         return;
-      HttpRequestMessage msg = new(HttpMethod.Delete, $"{Url}parts/{partId}");
-      var client = await GetClient();
+      HttpRequestMessage msg = new(HttpMethod.Delete, $"{_httpSettings.Url}parts/{partId}");
+      var client = await _httpClientManager.GetClient();
       var response = await client.SendAsync(msg);
       response.EnsureSuccessStatusCode();
     }
 
-    private static bool IsConnected()
+    private bool IsConnected()
     {
-      return Connectivity.Current.NetworkAccess != NetworkAccess.Internet;
+      return _connectivityChecker.Connected;
     }
   }
 }
