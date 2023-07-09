@@ -4,7 +4,7 @@ using PartsClient.Data;
 
 namespace Albums.Core
 {
-  public static class PartsManager
+  public static class AlbumManager
   {
     private const string BaseAddress = "https://localhost:3000";
     private const string Url = $"{BaseAddress}/api/";
