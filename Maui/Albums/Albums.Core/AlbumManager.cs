@@ -73,17 +73,42 @@ namespace Albums.Core
     Task Delete(string partId);
   }
 
+  public interface IAlbumFactory
+  {
+    Part CreateAlbum(string partName, string supplier, string partType);
+  }
+
+  internal class AlbumFactory : IAlbumFactory
+  {
+    public Part CreateAlbum(string partName, string supplier, string partType)
+    {
+      return new Part
+      {
+        PartName = partName,
+        Suppliers = new List<string>(new[]
+        {
+          supplier
+        }),
+        PartID = string.Empty,
+        PartType = partType,
+        PartAvailableDate = DateTime.Now.Date
+      };
+    }
+  }
+
   public class AlbumManager : IAlbumManager
   {
     private readonly IHttpClientManager _httpClientManager;
     private readonly IHttpSettings _httpSettings;
     private readonly IConnectivityChecker _connectivityChecker;
+    private readonly IAlbumFactory _albumFactory;
 
-    public AlbumManager(IHttpClientManager httpClientManager, IHttpSettings httpSettings, IConnectivityChecker connectivityChecker)
+    public AlbumManager(IHttpClientManager httpClientManager, IHttpSettings httpSettings, IConnectivityChecker connectivityChecker, IAlbumFactory albumFactory)
     {
       _httpClientManager = httpClientManager;
       _httpSettings = httpSettings;
       _connectivityChecker = connectivityChecker;
+      _albumFactory = albumFactory;
     }
 
     public async Task<IEnumerable<Part>> GetAll()
@@ -102,18 +127,7 @@ namespace Albums.Core
       if (!IsConnected())
         return new Part();
 
-      var part = new Part()
-      {
-        PartName = partName,
-        Suppliers = new List<string>(new[]
-        {
-          supplier
-        }),
-        PartID = string.Empty,
-        PartType = partType,
-        PartAvailableDate = DateTime.Now.Date
-      };
-
+      var part = _albumFactory.CreateAlbum(partName, supplier, partType);
       var msg = new HttpRequestMessage(HttpMethod.Post, $"{_httpSettings.Url}parts");
 
       msg.Content = JsonContent.Create<Part>(part);
