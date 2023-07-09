@@ -3,3 +3,4 @@ bin/
 .vs/
 *.user
 *.suo
+node_modules/
