@@ -13,6 +13,6 @@ public static class ServiceExtensions
       .AddSingleton<IHttpSettings, HttpSettings>()
       .AddSingleton<IHttpClientManager, HttpClientManager>()
       .AddSingleton<IAlbumManager, AlbumManager>()
-      .AddSingleton<IAlbumFactory, AlbumFactory>();
+      .AddSingleton<IAlbumTools, AlbumTools>();
   }
 }

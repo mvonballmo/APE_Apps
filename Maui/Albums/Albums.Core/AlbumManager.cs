@@ -6,20 +6,18 @@ namespace Albums.Core
   internal class AlbumManager : IAlbumManager
   {
     private readonly IHttpClientManager _httpClientManager;
-    private readonly IHttpSettings _httpSettings;
-    private readonly IAlbumFactory _albumFactory;
+    private readonly IAlbumTools _albumTools;
 
-    public AlbumManager(IHttpClientManager httpClientManager, IHttpSettings httpSettings, IAlbumFactory albumFactory)
+    public AlbumManager(IHttpClientManager httpClientManager, IAlbumTools albumTools)
     {
       _httpClientManager = httpClientManager;
-      _httpSettings = httpSettings;
-      _albumFactory = albumFactory;
+      _albumTools = albumTools;
     }
 
     public async Task<IEnumerable<Part>> GetAll()
     {
       var client = await _httpClientManager.GetClient();
-      var result = await client.GetStringAsync($"{_httpSettings.Url}parts");
+      var result = await client.GetStringAsync(_albumTools.GetAllUrl());
 
       return JsonConvert.DeserializeObject<List<Part>>(result);
     }
@@ -28,10 +26,10 @@ namespace Albums.Core
     {
       var client = await _httpClientManager.GetClient();
 
-      var part = _albumFactory.CreateAlbum(partName, supplier, partType);
-      var msg = new HttpRequestMessage(HttpMethod.Post, $"{_httpSettings.Url}parts");
+      var value = _albumTools.CreateAlbum(partName, supplier, partType);
+      var msg = new HttpRequestMessage(HttpMethod.Post, _albumTools.GetAddUrl());
 
-      msg.Content = JsonContent.Create(part);
+      msg.Content = JsonContent.Create(value);
 
       var response = await client.SendAsync(msg);
       response.EnsureSuccessStatusCode();
@@ -47,7 +45,7 @@ namespace Albums.Core
     {
       var client = await _httpClientManager.GetClient();
 
-      HttpRequestMessage msg = new(HttpMethod.Put, $"{_httpSettings.Url}parts/{part.PartID}");
+      HttpRequestMessage msg = new(HttpMethod.Put, _albumTools.GetUpdateUrl(part));
       msg.Content = JsonContent.Create(part);
 
       var response = await client.SendAsync(msg);
@@ -58,7 +56,7 @@ namespace Albums.Core
     {
       var client = await _httpClientManager.GetClient();
 
-      HttpRequestMessage msg = new(HttpMethod.Delete, $"{_httpSettings.Url}parts/{id}");
+      HttpRequestMessage msg = new(HttpMethod.Delete, _albumTools.GetDeleteUrl(id));
       var response = await client.SendAsync(msg);
       response.EnsureSuccessStatusCode();
     }
