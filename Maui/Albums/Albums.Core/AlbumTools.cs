@@ -1,12 +1,10 @@
 namespace Albums.Core;
 
-internal class AlbumTools : IAlbumTools
+internal class AlbumTools : DataItemToolsBase<Part>, IAlbumTools
 {
-  private readonly IHttpSettings _httpSettings;
-
   public AlbumTools(IHttpSettings httpSettings)
+    : base(httpSettings)
   {
-    _httpSettings = httpSettings;
   }
 
   public Part CreateAlbum(string partName, string supplier, string partType)
@@ -24,23 +22,10 @@ internal class AlbumTools : IAlbumTools
     };
   }
 
-  public string GetAllUrl()
-  {
-    return $"{_httpSettings.Url}parts";
-  }
+  protected override string UrlSuffix { get; } = "parts";
 
-  public string GetAddUrl()
+  protected override string GetItemId(Part item)
   {
-    return $"{_httpSettings.Url}parts";
-  }
-
-  public string GetUpdateUrl(Part item)
-  {
-    return$"{_httpSettings.Url}parts/{item.PartID}";
-  }
-
-  public string GetDeleteUrl(string id)
-  {
-    return $"{_httpSettings.Url}parts/{id}";
+    return item.PartID;
   }
 }
