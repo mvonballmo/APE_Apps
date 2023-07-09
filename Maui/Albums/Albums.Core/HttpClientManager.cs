@@ -5,18 +5,27 @@ namespace Albums.Core;
 internal class HttpClientManager : IHttpClientManager
 {
   private readonly IHttpSettings _httpSettings;
+  private readonly IConnectivityChecker _connectivityChecker;
   private static string? _authorizationKey;
   private static HttpClient? _client;
 
-  public HttpClientManager(IHttpSettings httpSettings)
+  public HttpClientManager(IHttpSettings httpSettings, IConnectivityChecker connectivityChecker)
   {
     _httpSettings = httpSettings;
+    _connectivityChecker = connectivityChecker;
   }
 
   public async Task<HttpClient> GetClient()
   {
+    if (!_connectivityChecker.Connected)
+    {
+      throw new InvalidOperationException("Network is unavailable.");
+    }
+
     if (_client != null)
+    {
       return _client;
+    }
 
     _client = new HttpClient();
 
