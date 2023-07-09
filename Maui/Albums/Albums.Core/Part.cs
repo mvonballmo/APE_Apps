@@ -73,8 +73,8 @@ namespace PartsClient.Data
         {
             get
             {
-                string result = String.Empty;
-                foreach (string supplier in Suppliers)
+                var result = String.Empty;
+                foreach (var supplier in Suppliers)
                 {
                     result += $"{supplier}, ";
                 }

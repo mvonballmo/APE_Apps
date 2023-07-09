@@ -16,7 +16,7 @@ public class CounterService : ICounterService
 
   public string GetLabel()
   {
-    string countLabel = _state.Count == 1 ? "time" : "times";
+    var countLabel = _state.Count == 1 ? "time" : "times";
 
     return $"Clicked {_state.Count} {countLabel}";
   }

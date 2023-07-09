@@ -1,105 +1,103 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Json;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-
+﻿using System.Net.Http.Json;
 using Newtonsoft.Json;
+using PartsClient.Data;
 
-namespace PartsClient.Data
+namespace Albums.Core
 {
-    public static class PartsManager
+  public static class PartsManager
+  {
+    private const string BaseAddress = "https://localhost:3000";
+    private const string Url = $"{BaseAddress}/api/";
+    private static string? _authorizationKey;
+
+    static HttpClient? _client;
+
+    private static async Task<HttpClient> GetClient()
     {
-        static readonly string BaseAddress = "https://localhost:3000";
-        static readonly string Url = $"{BaseAddress}/api/";
-        private static string authorizationKey;
+      if (_client != null)
+        return _client;
 
-        static HttpClient client;
+      _client = new HttpClient();
 
-        private static async Task<HttpClient> GetClient()
-        {
-            if (client != null)
-                return client;
+      if (string.IsNullOrEmpty(_authorizationKey))
+      {
+        _authorizationKey = await _client.GetStringAsync($"{Url}login");
+        _authorizationKey = JsonConvert.DeserializeObject<string>(_authorizationKey);
+      }
 
-            client = new HttpClient();
+      _client.DefaultRequestHeaders.Add("Authorization", _authorizationKey);
+      _client.DefaultRequestHeaders.Add("Accept", "application/json");
 
-            if (string.IsNullOrEmpty(authorizationKey))
-            {
-                authorizationKey = await client.GetStringAsync($"{Url}login");
-                authorizationKey = JsonConvert.DeserializeObject<string>(authorizationKey);
-            }
-
-            client.DefaultRequestHeaders.Add("Authorization", authorizationKey);
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-
-            return client;
-        }
-
-        public static async Task<IEnumerable<Part>> GetAll()
-        {
-            return new List<Part>()
-            {
-                new Part
-                {
-                     PartName = "CPU"
-                },
-                new Part
-                {
-                    PartName = "RAM"
-                }
-            };
-        }
-
-        public static async Task<Part> Add(string partName, string supplier, string partType)
-        {
-            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
-                return new Part();
-
-            Part part = new Part()
-            {
-                PartName = partName,
-                Suppliers = new List<string>(new[] { supplier }),
-                PartID = string.Empty,
-                PartType = partType,
-                PartAvailableDate = DateTime.Now.Date
-            };
-
-            var msg = new HttpRequestMessage(HttpMethod.Post, $"{Url}parts");
-
-            msg.Content = JsonContent.Create<Part>(part);
-
-            var response = await client.SendAsync(msg);
-            response.EnsureSuccessStatusCode();
-
-            var returnedJson = await response.Content.ReadAsStringAsync();
-
-            var insertedPart = JsonConvert.DeserializeObject<Part>(returnedJson);
-
-            return insertedPart;
-        }
-
-        public static async Task Update(Part part)
-        {
-            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
-                return;
-
-            HttpRequestMessage msg = new(HttpMethod.Put, $"{Url}parts/{part.PartID}");
-            msg.Content = JsonContent.Create<Part>(part);
-            HttpClient client = await GetClient();
-            var response = await client.SendAsync(msg);
-            response.EnsureSuccessStatusCode();
-        }
-
-        public static async Task Delete(string partID)
-        {
-            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
-                return;
-            HttpRequestMessage msg = new(HttpMethod.Delete, $"{Url}parts/{partID}");
-            HttpClient client = await GetClient();
-            var response = await client.SendAsync(msg);
-            response.EnsureSuccessStatusCode();
-        }
+      return _client;
     }
+
+    public static async Task<IEnumerable<Part>> GetAll()
+    {
+      if (!IsConnected())
+        return new List<Part>();
+
+      var client = await GetClient();
+      var result = await client.GetStringAsync($"{Url}parts");
+
+      return JsonConvert.DeserializeObject<List<Part>>(result);
+    }
+
+    public static async Task<Part> Add(string partName, string supplier, string partType)
+    {
+      if (!IsConnected())
+        return new Part();
+
+      var part = new Part()
+      {
+        PartName = partName,
+        Suppliers = new List<string>(new[]
+        {
+          supplier
+        }),
+        PartID = string.Empty,
+        PartType = partType,
+        PartAvailableDate = DateTime.Now.Date
+      };
+
+      var msg = new HttpRequestMessage(HttpMethod.Post, $"{Url}parts");
+
+      msg.Content = JsonContent.Create<Part>(part);
+
+      var response = await _client.SendAsync(msg);
+      response.EnsureSuccessStatusCode();
+
+      var returnedJson = await response.Content.ReadAsStringAsync();
+
+      var insertedPart = JsonConvert.DeserializeObject<Part>(returnedJson);
+
+      return insertedPart;
+    }
+
+    public static async Task Update(Part part)
+    {
+      if (!IsConnected())
+        return;
+
+      HttpRequestMessage msg = new(HttpMethod.Put, $"{Url}parts/{part.PartID}");
+      msg.Content = JsonContent.Create<Part>(part);
+      var client = await GetClient();
+      var response = await client.SendAsync(msg);
+      response.EnsureSuccessStatusCode();
+    }
+
+    public static async Task Delete(string partId)
+    {
+      if (!IsConnected())
+        return;
+      HttpRequestMessage msg = new(HttpMethod.Delete, $"{Url}parts/{partId}");
+      var client = await GetClient();
+      var response = await client.SendAsync(msg);
+      response.EnsureSuccessStatusCode();
+    }
+
+    private static bool IsConnected()
+    {
+      return Connectivity.Current.NetworkAccess != NetworkAccess.Internet;
+    }
+  }
 }
