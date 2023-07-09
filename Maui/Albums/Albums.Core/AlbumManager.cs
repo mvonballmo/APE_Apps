@@ -1,10 +1,9 @@
 ﻿using System.Net.Http.Json;
 using Newtonsoft.Json;
-using PartsClient.Data;
 
 namespace Albums.Core
 {
-  public class AlbumManager : IAlbumManager
+  internal class AlbumManager : IAlbumManager
   {
     private readonly IHttpClientManager _httpClientManager;
     private readonly IHttpSettings _httpSettings;
@@ -55,11 +54,11 @@ namespace Albums.Core
       response.EnsureSuccessStatusCode();
     }
 
-    public async Task Delete(string partId)
+    public async Task Delete(string id)
     {
       var client = await _httpClientManager.GetClient();
 
-      HttpRequestMessage msg = new(HttpMethod.Delete, $"{_httpSettings.Url}parts/{partId}");
+      HttpRequestMessage msg = new(HttpMethod.Delete, $"{_httpSettings.Url}parts/{id}");
       var response = await client.SendAsync(msg);
       response.EnsureSuccessStatusCode();
     }

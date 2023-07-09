@@ -1,4 +1,6 @@
-namespace Albums.Core;
+using Albums.Core;
+
+namespace Albums;
 
 internal class ConnectivityChecker : IConnectivityChecker
 {

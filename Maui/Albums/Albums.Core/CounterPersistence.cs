@@ -1,6 +1,6 @@
 ﻿namespace Albums.Core
 {
-  public class CounterPersistence : ICounterPersistence
+  internal class CounterPersistence : ICounterPersistence
   {
     private readonly IDialogService _dialogService;
 

@@ -20,9 +20,9 @@ public static class MauiProgram
     builder.Logging.AddDebug();
 #endif
 
-    builder.Services.AddServices();
-    builder.Services.AddTransient<IDialogService, DialogService>();
-    builder.Services.AddSingleton<ICounterPersistence, CounterPersistence>();
+    builder.Services
+      .AddServices()
+      .AddMauiServices();
 
     return builder.Build();
   }

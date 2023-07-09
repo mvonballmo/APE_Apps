@@ -1,6 +1,6 @@
 ﻿namespace Albums.Core;
 
-public class CounterState : ICounterState
+internal class CounterState : ICounterState
 {
   public int Count { get; set; }
 }

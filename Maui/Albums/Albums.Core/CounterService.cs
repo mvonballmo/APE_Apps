@@ -1,6 +1,6 @@
 ﻿namespace Albums.Core;
 
-public class CounterService : ICounterService
+internal class CounterService : ICounterService
 {
   private readonly ICounterState _state;
 

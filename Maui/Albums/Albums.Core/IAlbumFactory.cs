@@ -1,5 +1,3 @@
-using PartsClient.Data;
-
 namespace Albums.Core;
 
 public interface IAlbumFactory
