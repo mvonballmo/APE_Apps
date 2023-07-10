@@ -1,6 +1,6 @@
 namespace Albums.Core;
 
-public interface IAlbumManager : IDataItemManager<Part>
+public interface IAlbumManager : IDataItemManager<Album>
 {
-  Task<Part> Add(string partName, string supplier, string partType);
+  Task<Album> Add(string name);
 }

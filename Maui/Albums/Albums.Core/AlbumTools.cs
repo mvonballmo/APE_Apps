@@ -1,31 +1,24 @@
 namespace Albums.Core;
 
-internal class AlbumTools : DataItemToolsBase<Part>, IAlbumTools
+internal class AlbumTools : DataItemToolsBase<Album>, IAlbumTools
 {
   public AlbumTools(IHttpSettings httpSettings)
     : base(httpSettings)
   {
   }
 
-  public Part CreateAlbum(string partName, string supplier, string partType)
+  public Album CreateAlbum(string name)
   {
-    return new Part
+    return new Album
     {
-      PartName = partName,
-      Suppliers = new List<string>(new[]
-      {
-        supplier
-      }),
-      PartID = string.Empty,
-      PartType = partType,
-      PartAvailableDate = DateTime.Now.Date
+      Name = name
     };
   }
 
-  protected override string UrlSuffix { get; } = "parts";
+  protected override string UrlSuffix { get; } = "albums";
 
-  protected override string GetItemId(Part item)
+  protected override string GetItemId(Album item)
   {
-    return item.PartID;
+    return item.Id.ToString();
   }
 }

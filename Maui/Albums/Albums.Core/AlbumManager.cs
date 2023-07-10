@@ -1,6 +1,6 @@
 ﻿namespace Albums.Core
 {
-  internal class AlbumManager : DataItemManagerBase<Part>, IAlbumManager
+  internal class AlbumManager : DataItemManagerBase<Album>, IAlbumManager
   {
     private readonly IAlbumTools _albumTools;
 
@@ -10,9 +10,9 @@
       _albumTools = albumTools;
     }
 
-    public async Task<Part> Add(string partName, string supplier, string partType)
+    public async Task<Album> Add(string name)
     {
-      return await DoAdd(_albumTools.CreateAlbum(partName, supplier, partType));
+      return await DoAdd(_albumTools.CreateAlbum(name));
     }
   }
 }

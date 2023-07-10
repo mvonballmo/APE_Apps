@@ -1,6 +1,6 @@
 namespace Albums.Core;
 
-public interface IAlbumTools : IDataItemTools<Part>
+public interface IAlbumTools : IDataItemTools<Album>
 {
-  Part CreateAlbum(string partName, string supplier, string partType);
+  Album CreateAlbum(string name);
 }
