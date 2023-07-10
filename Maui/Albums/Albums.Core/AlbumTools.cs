@@ -1,6 +1,6 @@
 namespace Albums.Core;
 
-internal class AlbumTools : DataItemToolsBase<Album>, IAlbumTools
+internal class AlbumTools : UniqueItemToolsBase<Album>, IAlbumTools
 {
   public AlbumTools(IHttpSettings httpSettings)
     : base(httpSettings)
@@ -16,9 +16,4 @@ internal class AlbumTools : DataItemToolsBase<Album>, IAlbumTools
   }
 
   protected override string UrlSuffix { get; } = "albums";
-
-  protected override string GetItemId(Album item)
-  {
-    return item.Id.ToString();
-  }
 }

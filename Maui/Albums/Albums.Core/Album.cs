@@ -1,8 +1,6 @@
 namespace Albums.Core;
 
-public class Album
+public class Album : UniqueItem
 {
-  public int Id { get; }
-
   public string Name { get; set; }
 }
