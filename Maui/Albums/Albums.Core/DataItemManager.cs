@@ -3,12 +3,12 @@ using Newtonsoft.Json;
 
 namespace Albums.Core;
 
-internal class DataItemManagerBase<T> : IDataItemManager<T>
+internal class DataItemManager<T> : IDataItemManager<T>
 {
   private readonly IHttpClientManager _httpClientManager;
   private readonly IDataItemTools<T> _dataItemTools;
 
-  protected DataItemManagerBase(IHttpClientManager httpClientManager, IDataItemTools<T> dataItemTools)
+  protected DataItemManager(IHttpClientManager httpClientManager, IDataItemTools<T> dataItemTools)
   {
     _httpClientManager = httpClientManager;
     _dataItemTools = dataItemTools;
@@ -60,23 +60,5 @@ internal class DataItemManagerBase<T> : IDataItemManager<T>
     HttpRequestMessage msg = new(HttpMethod.Delete, _dataItemTools.GetDeleteUrl(id));
     var response = await client.SendAsync(msg);
     response.EnsureSuccessStatusCode();
-  }
-
-  protected async Task<T> DoAdd(T value)
-  {
-    var client = await _httpClientManager.GetClient();
-
-    var msg = new HttpRequestMessage(HttpMethod.Post, _dataItemTools.GetAddUrl());
-
-    msg.Content = JsonContent.Create(value);
-
-    var response = await client.SendAsync(msg);
-    response.EnsureSuccessStatusCode();
-
-    var returnedJson = await response.Content.ReadAsStringAsync();
-
-    var insertedPart = JsonConvert.DeserializeObject<T>(returnedJson);
-
-    return insertedPart;
   }
 }
