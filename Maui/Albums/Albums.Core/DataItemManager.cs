@@ -19,9 +19,12 @@ internal class DataItemManager<T> : IDataItemManager<T>
     var client = await _httpClientManager.GetClient();
     var result = await client.GetStringAsync(_dataItemTools.GetAllUrl());
 
-    // TODO Handle null value with an exception
+    return DeserializeObject<IEnumerable<T>>(result);
+  }
 
-    return JsonConvert.DeserializeObject<List<T>>(result);
+  private static TTarget DeserializeObject<TTarget>(string data)
+  {
+    return JsonConvert.DeserializeObject<TTarget>(data) ?? throw new InvalidOperationException("Deserializing JSON returned null.");
   }
 
   public async Task<T> Add(T item)
@@ -37,9 +40,7 @@ internal class DataItemManager<T> : IDataItemManager<T>
 
     var returnedJson = await response.Content.ReadAsStringAsync();
 
-    // TODO Handle null value with an exception
-
-    return JsonConvert.DeserializeObject<T>(returnedJson);
+    return DeserializeObject<T>(returnedJson);
   }
 
   public async Task Update(T part)
