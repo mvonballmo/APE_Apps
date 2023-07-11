@@ -28,15 +28,18 @@ internal class HttpClientManager : IHttpClientManager
     }
 
     _client = new HttpClient();
-
-    if (string.IsNullOrEmpty(_authorizationKey))
-    {
-      _authorizationKey = await _client.GetStringAsync($"{_httpSettings.Url}login");
-      _authorizationKey = JsonConvert.DeserializeObject<string>(_authorizationKey);
-    }
-
-    _client.DefaultRequestHeaders.Add("Authorization", _authorizationKey);
     _client.DefaultRequestHeaders.Add("Accept", "application/json");
+
+    if (_httpSettings.RequiresAuthentication)
+    {
+      if (string.IsNullOrEmpty(_authorizationKey))
+      {
+        _authorizationKey = await _client.GetStringAsync($"{_httpSettings.Url}login");
+        _authorizationKey = JsonConvert.DeserializeObject<string>(_authorizationKey);
+      }
+
+      _client.DefaultRequestHeaders.Add("Authorization", _authorizationKey);
+    }
 
     return _client;
   }

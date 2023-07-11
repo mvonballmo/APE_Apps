@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Albums.Core;
 
-internal class DataItemManagerBase<T>
+internal class DataItemManagerBase<T> : IDataItemManager<T>
 {
   private readonly IHttpClientManager _httpClientManager;
   private readonly IDataItemTools<T> _dataItemTools;
@@ -19,7 +19,27 @@ internal class DataItemManagerBase<T>
     var client = await _httpClientManager.GetClient();
     var result = await client.GetStringAsync(_dataItemTools.GetAllUrl());
 
+    // TODO Handle null value with an exception
+
     return JsonConvert.DeserializeObject<List<T>>(result);
+  }
+
+  public async Task<T> Add(T item)
+  {
+    var client = await _httpClientManager.GetClient();
+
+    var msg = new HttpRequestMessage(HttpMethod.Post, _dataItemTools.GetAddUrl());
+
+    msg.Content = JsonContent.Create(item);
+
+    var response = await client.SendAsync(msg);
+    response.EnsureSuccessStatusCode();
+
+    var returnedJson = await response.Content.ReadAsStringAsync();
+
+    // TODO Handle null value with an exception
+
+    return JsonConvert.DeserializeObject<T>(returnedJson);
   }
 
   public async Task Update(T part)

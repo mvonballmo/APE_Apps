@@ -2,7 +2,9 @@ namespace Albums.Core;
 
 internal class HttpSettings : IHttpSettings
 {
-  private const string BaseAddress = "https://localhost:3000";
+  private const string BaseAddress = "http://localhost:3000";
 
-  public string Url { get; } = $"{BaseAddress}/api/";
+  public bool RequiresAuthentication => false;
+
+  public string Url => $"{BaseAddress}/";
 }
