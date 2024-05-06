@@ -1,6 +1,5 @@
 namespace Albums.Core;
 
-public interface IAlbumTools : IDataItemTools<Album>
+public interface IAlbumTools : IUniqueItemTools<Album>
 {
-  Album CreateAlbum(string name);
 }

@@ -1,5 +1,5 @@
 namespace Albums.Core;
 
-public interface IPersonManager : IDataItemManager<Person>
+public interface IPersonManager : IUniqueItemManager<Person>
 {
 }

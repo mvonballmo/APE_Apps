@@ -1,5 +1,5 @@
 namespace Albums.Core;
 
-public interface IAlbumManager : IDataItemManager<Album>
+public interface IAlbumManager : IUniqueItemManager<Album>
 {
 }

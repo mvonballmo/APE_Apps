@@ -1,6 +1,5 @@
 using FakeItEasy;
 using Microsoft.Extensions.DependencyInjection;
-using NUnit.Framework;
 
 namespace Albums.Core.Tests;
 

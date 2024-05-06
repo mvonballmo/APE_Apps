@@ -1,6 +1,6 @@
 namespace Albums.Core;
 
-internal abstract class UniqueItemToolsBase<T> : DataItemToolsBase<T>
+internal abstract class UniqueItemToolsBase<T> : DataItemToolsBase<T, int>
   where T : UniqueItem
 {
   protected UniqueItemToolsBase(IHttpSettings httpSettings)

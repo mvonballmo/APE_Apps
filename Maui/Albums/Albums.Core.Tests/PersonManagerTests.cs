@@ -3,30 +3,30 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Albums.Core.Tests;
 
 [TestFixture]
-public class AlbumManagerTests : HttpClientTestsBase
+public class PersonManagerTests : HttpClientTestsBase
 {
   [Test]
   public async Task TestGetAll()
   {
     var provider = CreateProvider();
-    var manager = provider.GetRequiredService<IAlbumManager>();
+    var manager = provider.GetRequiredService<IPersonManager>();
 
-    var albums = (await manager.GetAll()).ToList();
+    var persons = (await manager.GetAll()).ToList();
 
-    Assert.That(albums.Count, Is.EqualTo(6));
+    Assert.That(persons.Count, Is.EqualTo(2));
   }
 
   [Test]
   public async Task TestAdd()
   {
     var provider = CreateProvider();
-    var manager = provider.GetRequiredService<IAlbumManager>();
+    var manager = provider.GetRequiredService<IPersonManager>();
 
-    var newAlbum = await manager.Add(new Album { Name = "Dark Side of the Moon", Id = 16 });
+    var newPerson = await manager.Add(new Person { Name = "Dark Side of the Moon", Id = 16 });
 
     try
     {
-      Assert.That(newAlbum.Name, Is.EqualTo("Dark Side of the Moon"));
+      Assert.That(newPerson.Name, Is.EqualTo("Dark Side of the Moon"));
 
       var darkSideOfTheMoon = (await manager.GetAll()).FirstOrDefault(a => a.Name == "Dark Side of the Moon");
 
@@ -34,7 +34,7 @@ public class AlbumManagerTests : HttpClientTestsBase
     }
     finally
     {
-      await manager.Delete(newAlbum.Id);
+      await manager.Delete(newPerson.Id);
     }
   }
 
@@ -42,21 +42,21 @@ public class AlbumManagerTests : HttpClientTestsBase
   public async Task TestUpdate()
   {
     var provider = CreateProvider();
-    var manager = provider.GetRequiredService<IAlbumManager>();
+    var manager = provider.GetRequiredService<IPersonManager>();
 
-    var newAlbum = await manager.Add(new Album { Name = "Dark Side of the Moon", Id = 16 });
+    var newPerson = await manager.Add(new Person { Name = "Dark Side of the Moon", Id = 16 });
 
     try
     {
-      Assert.That(newAlbum.Name, Is.EqualTo("Dark Side of the Moon"));
+      Assert.That(newPerson.Name, Is.EqualTo("Dark Side of the Moon"));
 
       var darkSideOfTheMoon = (await manager.GetAll()).FirstOrDefault(a => a.Name == "Dark Side of the Moon");
 
       Assert.That(darkSideOfTheMoon, Is.Not.Null);
 
-      newAlbum.Name = "Wish You Were Here";
+      newPerson.Name = "Wish You Were Here";
 
-      await manager.Update(newAlbum);
+      await manager.Update(newPerson);
 
       var wishYouWereHere = (await manager.GetAll()).FirstOrDefault(a => a.Name == "Wish You Were Here");
 
@@ -64,7 +64,7 @@ public class AlbumManagerTests : HttpClientTestsBase
     }
     finally
     {
-      await manager.Delete(newAlbum.Id);
+      await manager.Delete(newPerson.Id);
     }
   }
 }

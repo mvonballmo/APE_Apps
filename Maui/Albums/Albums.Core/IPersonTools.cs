@@ -1,6 +1,5 @@
 namespace Albums.Core;
 
-public interface IPersonTools : IDataItemTools<Person>
+public interface IPersonTools : IUniqueItemTools<Person>
 {
-  Person CreatePerson(string firstName, string lastName);
 }

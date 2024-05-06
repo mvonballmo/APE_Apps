@@ -1,6 +1,4 @@
-﻿using Albums.Core;
-
-namespace Albums;
+﻿namespace Albums;
 
 public partial class ClockPage : ContentPage
 {

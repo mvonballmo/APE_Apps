@@ -1,6 +1,6 @@
 namespace Albums.Core;
 
-public interface IDataItemTools<in T>
+public interface IDataItemTools<in T, in TIdentifier>
 {
   string GetAllUrl();
 
@@ -8,5 +8,5 @@ public interface IDataItemTools<in T>
 
   string GetUpdateUrl(T item);
 
-  string GetDeleteUrl(string id);
+  string GetDeleteUrl(TIdentifier id);
 }

@@ -1,6 +1,6 @@
 namespace Albums.Core;
 
-internal abstract class DataItemToolsBase<T> : IDataItemTools<T>
+internal abstract class DataItemToolsBase<T, TIdentifier> : IDataItemTools<T, TIdentifier>
 {
   private readonly IHttpSettings _httpSettings;
 
@@ -24,7 +24,7 @@ internal abstract class DataItemToolsBase<T> : IDataItemTools<T>
     return$"{GetBaseUrl()}/{GetItemId(item)}";
   }
 
-  public string GetDeleteUrl(string id)
+  public string GetDeleteUrl(TIdentifier id)
   {
     return $"{GetBaseUrl()}/{id}";
   }

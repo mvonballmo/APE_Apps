@@ -1,4 +1,10 @@
 {
+  "login": [
+    "AuthorizationKey"
+  ],
+  "dummy": [
+    "dummy"
+  ],
   "albums": [
     {
       "title": "First album",
@@ -47,6 +53,16 @@
       "id": 2,
       "make": "Opel",
       "model": "Corsa"
+    }
+  ],
+  "people": [
+    {
+      "name": "Bob Smith",
+      "age": 42
+    },
+    {
+      "name": "Horace Jenkins",
+      "age": 33
     }
   ],
   "addresses": [

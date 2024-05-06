@@ -34,7 +34,7 @@ internal class HttpClientManager : IHttpClientManager
     {
       if (string.IsNullOrEmpty(_authorizationKey))
       {
-        _authorizationKey = await _client.GetStringAsync($"{_httpSettings.Url}login");
+        _authorizationKey = await _client.GetStringAsync($"{_httpSettings.LoginUrl}");
         _authorizationKey = JsonConvert.DeserializeObject<string>(_authorizationKey);
       }
 

@@ -1,6 +1,6 @@
 namespace Albums.Core;
 
-public interface IDataItemManager<T>
+public interface IDataItemManager<T, in TIdentifier>
 {
   Task<IEnumerable<T>> GetAll();
 
@@ -8,7 +8,5 @@ public interface IDataItemManager<T>
 
   Task Update(T part);
 
-  // TODO Make id type generic
-
-  Task Delete(string id);
+  Task Delete(TIdentifier id);
 }
