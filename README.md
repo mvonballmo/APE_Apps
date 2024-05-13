@@ -1,3 +1,3 @@
 # README
 
-This is a different readme file.
+These are the apps for the HFU APE course.
