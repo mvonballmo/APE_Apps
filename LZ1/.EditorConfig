@@ -26,7 +26,7 @@ csharp_prefer_braces = true:suggestion
 csharp_prefer_simple_default_expression = true:suggestion
 csharp_prefer_static_local_function = true:suggestion
 
-csharp_style_namespace_declarations = block_scoped:suggestion
+csharp_style_namespace_declarations = file_scoped:suggestion
 csharp_style_prefer_method_group_conversion = true:suggestion
 csharp_style_expression_bodied_methods = false:silent
 csharp_style_expression_bodied_constructors = false:suggestion
@@ -70,6 +70,8 @@ csharp_style_prefer_readonly_struct = true:suggestion
 csharp_style_prefer_readonly_struct_member = true:suggestion
 csharp_style_allow_blank_line_after_token_in_conditional_expression_experimental = true:silent
 csharp_style_allow_blank_line_after_token_in_arrow_expression_clause_experimental = true:silent
+
+csharp_style_prefer_primary_constructors = false
 
 # Naming rules
 
@@ -148,6 +150,10 @@ dotnet_style_qualification_for_field = false:suggestion
 dotnet_style_qualification_for_property = false:suggestion
 dotnet_style_qualification_for_method = false:suggestion
 dotnet_style_qualification_for_event = false:suggestion
+
+# Documentation
+
+dotnet_diagnostic.CS1591.severity = none
 
 # ReSharper XML Doc formatting preferences
 

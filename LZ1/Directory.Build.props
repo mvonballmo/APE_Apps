@@ -21,6 +21,9 @@
              the property used by NuGet to determine where to put its restore configuration. -->
     <BaseIntermediateOutputPath>$(ProjectOutputPath)/nuget/$(MSBuildProjectName)</BaseIntermediateOutputPath>
   </PropertyGroup>
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileDirectory).stylecop.json" Link=".stylecop.json"/>
   </ItemGroup>
