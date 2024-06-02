@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LZ1.App", "LZ1.Maui\LZ1.Maui.csproj", "{C8E7A780-1556-4179-A91A-448A3C999BD5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{2FC52630-D895-4423-A797-F03F6190352A}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		.EditorConfig = .EditorConfig
+		.stylecop.json = .stylecop.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8E7A780-1556-4179-A91A-448A3C999BD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8E7A780-1556-4179-A91A-448A3C999BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8E7A780-1556-4179-A91A-448A3C999BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8E7A780-1556-4179-A91A-448A3C999BD5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
