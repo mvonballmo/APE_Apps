@@ -20,7 +20,8 @@ public static class MauiProgram
 
         builder.Services
             .AddServices()
-            .AddSingleton<IDialogService, DialogService>();
+            .AddSingleton<IDialogService, DialogService>()
+            .AddTransient<MainPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();
