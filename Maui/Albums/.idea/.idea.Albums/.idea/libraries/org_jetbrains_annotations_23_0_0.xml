@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="org.jetbrains.annotations-23.0.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.nuget/packages/xamarin.jetbrains.annotations/23.0.0.5/jar/org.jetbrains.annotations-23.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
