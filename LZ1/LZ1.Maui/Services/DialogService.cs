@@ -5,9 +5,9 @@ namespace LZ1.App.Services;
 
 public class DialogService : IDialogService
 {
-    public Task<bool> AskAsync(string message)
+    public async Task<bool> AskAsync(string message)
     {
-        return GetMainPage().DisplayAlert("Confirm", message, "Yes", "No");
+        return !await GetMainPage().DisplayAlert("Confirm", message, "Yes", "No");
     }
 
     public Task Show(string message)

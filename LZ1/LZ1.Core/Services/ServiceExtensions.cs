@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LZ1.Core;
+namespace LZ1.Core.Services;
 
 public static class ServiceExtensions
 {
