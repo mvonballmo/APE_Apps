@@ -10,7 +10,7 @@ public partial class MainPageViewModel : ViewModelBase
     private readonly ILocalStorage _localStorage;
     private string _firstName = string.Empty;
     private string _lastName = string.Empty;
-    private int _count;
+    private int _age;
     private Person? _selectedItem;
 
     public MainPageViewModel()
@@ -49,10 +49,10 @@ public partial class MainPageViewModel : ViewModelBase
 
     public object FullName => $"{LastName}, {FirstName}";
 
-    public int Count
+    public int Age
     {
-        get => _count;
-        set => SetField(ref _count, value);
+        get => _age;
+        set => SetField(ref _age, value);
     }
 
     public bool IsReady => SelectedItem != null;
@@ -70,13 +70,13 @@ public partial class MainPageViewModel : ViewModelBase
                 {
                     FirstName = value.FirstName;
                     LastName = value.LastName;
-                    Count = value.Count;
+                    Age = value.Age;
                 }
                 else
                 {
                     FirstName = string.Empty;
                     LastName = string.Empty;
-                    Count = 0;
+                    Age = 0;
                 }
             }
         }
@@ -84,7 +84,7 @@ public partial class MainPageViewModel : ViewModelBase
 
     public void Increment()
     {
-        Count += 1;
+        Age += 1;
     }
 
     [RelayCommand]
@@ -131,7 +131,7 @@ public partial class MainPageViewModel : ViewModelBase
 
         model.FirstName = FirstName;
         model.LastName = LastName;
-        model.Count = Count;
+        model.Age = Age;
 
         await _localStorage.Save(model);
     }

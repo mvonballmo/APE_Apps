@@ -37,12 +37,12 @@ public class MainPageViewModelTests : TestsBase
 
         viewModel.PropertyChanged += (_, args) => notifications.Add(args.PropertyName);
 
-        Assert.That(viewModel.Count, Is.EqualTo(1));
+        Assert.That(viewModel.Age, Is.EqualTo(1));
 
         viewModel.Increment();
 
-        Assert.That(viewModel.Count, Is.EqualTo(2));
-        Assert.That(notifications, Is.EquivalentTo(new[] { "Count" }));
+        Assert.That(viewModel.Age, Is.EqualTo(2));
+        Assert.That(notifications, Is.EquivalentTo(new[] { "Age" }));
     }
 
     [Test]
@@ -73,6 +73,7 @@ public class MainPageViewModelTests : TestsBase
         var serviceProvider = CreateServiceProvider();
         var localStorage = serviceProvider.GetRequiredService<ILocalStorage>();
 
+        await localStorage.Initialize();
         await localStorage.DeleteAll();
 
         var viewModel = await GetMainPageViewModel(serviceProvider);
@@ -91,6 +92,7 @@ public class MainPageViewModelTests : TestsBase
         var viewModel = serviceProvider.GetRequiredService<MainPageViewModel>();
         var localStorage = serviceProvider.GetRequiredService<ILocalStorage>();
 
+        await localStorage.Initialize();
         await localStorage.DeleteAll();
 
         var notifications = new List<string?>();
@@ -99,7 +101,7 @@ public class MainPageViewModelTests : TestsBase
 
         await viewModel.EnsureModelLoaded();
 
-        Assert.That(notifications, Is.EquivalentTo(new[] { "SelectedItem", "FirstName", "FullName", "LastName", "FullName", "Count", "IsReady" }));
+        Assert.That(notifications, Is.EquivalentTo(new[] { "SelectedItem", "FirstName", "FullName", "LastName", "FullName", "Age", "IsReady" }));
     }
 
     private async Task<MainPageViewModel> GetMainPageViewModel()

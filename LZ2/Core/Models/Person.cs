@@ -13,5 +13,5 @@ public class Person
 
     public string LastName { get; set; } = "Muster";
 
-    public int Count { get; set; } = 1;
+    public int Age { get; set; } = 1;
 }

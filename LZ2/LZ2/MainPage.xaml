@@ -31,7 +31,7 @@
                        Style="{StaticResource Headline}"
                        HorizontalOptions="Start" />
 
-                <Label Text="{Binding Count}"
+                <Label Text="{Binding Age}"
                        Style="{StaticResource Headline}"
                        HorizontalOptions="End"
                        Grid.Column="1" />
@@ -58,7 +58,7 @@
                                 <Label Grid.Column="1"
                                        Text="{Binding LastName}" />
                                 <Label Grid.Column="2"
-                                       Text="{Binding Count}"
+                                       Text="{Binding Age}"
                                        VerticalOptions="End" />
                             </Grid>
                         </ViewCell>
@@ -74,7 +74,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Button
-                    Text="Increment Count"
+                    Text="Increment Age"
                     SemanticProperties.Hint="Increments the count"
                     Clicked="OnCounterClicked"
                     HorizontalOptions="End" />

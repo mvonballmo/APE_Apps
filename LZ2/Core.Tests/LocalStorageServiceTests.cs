@@ -124,7 +124,7 @@ public class LocalStorageServiceTests : TestsBase
         {
             FirstName = "John",
             LastName = "Doe",
-            Count = 4
+            Age = 4
         };
     }
 }
