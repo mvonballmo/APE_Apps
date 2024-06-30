@@ -1,3 +1,4 @@
+using Core.Models;
 using SQLite;
 
 namespace Core.Services;

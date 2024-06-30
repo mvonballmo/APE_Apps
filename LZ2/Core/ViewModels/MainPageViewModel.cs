@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.Input;
+using Core.Models;
 using Core.Services;
 
 namespace Core;

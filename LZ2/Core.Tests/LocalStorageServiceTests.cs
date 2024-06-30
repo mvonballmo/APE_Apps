@@ -1,3 +1,4 @@
+using Core.Models;
 using Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 
