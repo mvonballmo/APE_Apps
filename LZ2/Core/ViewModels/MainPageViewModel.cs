@@ -96,16 +96,16 @@ public partial class MainPageViewModel : ViewModelBase
             {
                 await _localStorage.Initialize();
 
-                var settingsModels = await _localStorage.LoadAll();
+                var people = await _localStorage.LoadAll();
 
-                foreach (var settingsModel in settingsModels)
+                if (people.Count == 0)
                 {
-                    Items.Add(settingsModel);
+                    people.Add(new Person());
                 }
 
-                if (Items.Count == 0)
+                foreach (var person in people)
                 {
-                    Items.Add(new Person());
+                    Items.Add(person);
                 }
 
                 SelectedItem = Items.First();
