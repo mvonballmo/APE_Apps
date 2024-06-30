@@ -118,9 +118,9 @@ public class LocalStorageServiceTests : TestsBase
         return localStorage;
     }
 
-    private static SettingsModel CreateSettingsModel()
+    private static Person CreateSettingsModel()
     {
-        return new SettingsModel
+        return new Person
         {
             FirstName = "John",
             LastName = "Doe",

@@ -17,38 +17,38 @@ public class SqliteLocalStorage : ILocalStorage
     {
         // Check whether our table already exists. If not, we're creating it here.
         if (_connection.TableMappings.All(x =>
-                !x.TableName.Equals(nameof(SettingsModel), StringComparison.InvariantCultureIgnoreCase)))
+                !x.TableName.Equals(nameof(Person), StringComparison.InvariantCultureIgnoreCase)))
         {
-            await _connection.CreateTableAsync<SettingsModel>();
+            await _connection.CreateTableAsync<Person>();
         }
     }
 
-    public async Task<bool> Delete(SettingsModel settingsModel)
+    public async Task<bool> Delete(Person person)
     {
-        return await _connection.DeleteAsync<SettingsModel>(settingsModel.Id) == 1;
+        return await _connection.DeleteAsync<Person>(person.Id) == 1;
     }
 
     /// <inheritdoc/>
-    public Task<List<SettingsModel>> LoadAll()
+    public Task<List<Person>> LoadAll()
     {
-        return _connection.Table<SettingsModel>().ToListAsync();
+        return _connection.Table<Person>().ToListAsync();
     }
 
     /// <inheritdoc/>
     public async Task<bool> DeleteAll()
     {
-        return await _connection.DeleteAllAsync<SettingsModel>() >= 0;
+        return await _connection.DeleteAllAsync<Person>() >= 0;
     }
 
     /// <inheritdoc/>
-    public async Task<bool> Save(SettingsModel settingsModel)
+    public async Task<bool> Save(Person person)
     {
-        return await _connection.InsertOrReplaceAsync(settingsModel) == 1;
+        return await _connection.InsertOrReplaceAsync(person) == 1;
     }
 
     /// <inheritdoc/>
-    public async Task<SettingsModel?> TryLoad(int id)
+    public async Task<Person?> TryLoad(int id)
     {
-        return await _connection.FindAsync<SettingsModel?>(id);
+        return await _connection.FindAsync<Person?>(id);
     }
 }

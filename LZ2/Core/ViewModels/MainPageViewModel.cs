@@ -11,7 +11,7 @@ public partial class MainPageViewModel : ViewModelBase
     private string _firstName = string.Empty;
     private string _lastName = string.Empty;
     private int _count;
-    private SettingsModel? _selectedItem;
+    private Person? _selectedItem;
 
     public MainPageViewModel()
     {
@@ -57,9 +57,9 @@ public partial class MainPageViewModel : ViewModelBase
 
     public bool IsReady => SelectedItem != null;
 
-    public ObservableCollection<SettingsModel> Items { get; private set; } = new();
+    public ObservableCollection<Person> Items { get; private set; } = new();
 
-    public SettingsModel? SelectedItem
+    public Person? SelectedItem
     {
         get => _selectedItem;
         set
@@ -105,7 +105,7 @@ public partial class MainPageViewModel : ViewModelBase
 
                 if (Items.Count == 0)
                 {
-                    Items.Add(new SettingsModel());
+                    Items.Add(new Person());
                 }
 
                 SelectedItem = Items.First();
@@ -138,7 +138,7 @@ public partial class MainPageViewModel : ViewModelBase
 
     public void Add()
     {
-        var settingsModel = new SettingsModel();
+        var settingsModel = new Person();
 
         Items.Add(settingsModel);
 

@@ -15,7 +15,7 @@ public static class CoreServiceProviderExtensions
         return serviceCollection
             .AddSingleton<ILocalStorage, SqliteLocalStorage>()
             .AddSingleton<LocalStorageSettings>()
-            .AddSingleton<SettingsModel>()
+            .AddSingleton<Person>()
             .AddTransient<MainPageViewModel>();
     }
 

@@ -2,7 +2,7 @@ using SQLite;
 
 namespace Core.Models;
 
-public class SettingsModel
+public class Person
 {
     [PrimaryKey]
     [AutoIncrement]

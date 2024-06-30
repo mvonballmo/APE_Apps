@@ -4,16 +4,16 @@ namespace Core.Services;
 
 public interface ILocalStorage
 {
-    // TODO Make the interface generic rather than SettingsModel-specifics
+    // TODO Make the interface generic rather than Person-specifics
     // TODO Add documentation
 
-    Task<SettingsModel?> TryLoad(int id);
+    Task<Person?> TryLoad(int id);
 
-    Task<bool> Save(SettingsModel settingsModel);
+    Task<bool> Save(Person person);
 
-    Task<bool> Delete(SettingsModel settingsModel);
+    Task<bool> Delete(Person person);
 
-    Task<List<SettingsModel>> LoadAll();
+    Task<List<Person>> LoadAll();
 
     Task<bool> DeleteAll();
     Task Initialize();
