@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <Company>Marco von Ballmoos</Company>
+    <Product>LZ1</Product>
+    <Version>1.0.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Description>LZ1</Description>
+    <Copyright>Copyright (c) 2024 Marco von Ballmoos. All rights reserved.</Copyright>
+  </PropertyGroup>
+  <PropertyGroup>
+    <!-- The following configuration makes bin/, obj, and nuget/ folders so you can easily decide
+             what to delete when the compiler is misbehaving. You can throw away obj/ separately so
+             you don't have to run restore again. -->
+    <ProjectOutputPath>$(MSBuildThisFileDirectory)/Output</ProjectOutputPath>
+    <OutputPath>$(ProjectOutputPath)/bin/$(MSBuildProjectName)</OutputPath>
+    <IntermediateOutputPath>$(ProjectOutputPath)/obj/$(MSBuildProjectName)</IntermediateOutputPath>
+    <!-- This property sounds like it might be related to the one above, but it's de-facto the
+             the property used by NuGet to determine where to put its restore configuration. -->
+    <BaseIntermediateOutputPath>$(ProjectOutputPath)/nuget/$(MSBuildProjectName)</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory).stylecop.json" Link=".stylecop.json"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.333">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

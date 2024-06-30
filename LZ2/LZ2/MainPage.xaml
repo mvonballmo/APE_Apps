@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:core="clr-namespace:Core;assembly=Core"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Maui2024.MainPage">
+
+    <ContentPage.BindingContext>
+        <core:MainPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+            EventName="Appearing"
+            Command="{Binding EnsureModelLoadedCommand}" />
+    </ContentPage.Behaviors>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{Binding FullName}"
+                       Style="{StaticResource Headline}"
+                       HorizontalOptions="Start" />
+
+                <Label Text="{Binding Count}"
+                       Style="{StaticResource Headline}"
+                       HorizontalOptions="End"
+                       Grid.Column="1" />
+            </Grid>
+
+            <Entry Text="{Binding FirstName, Mode=TwoWay}"
+                   Placeholder="Please enter your first name" />
+
+            <Entry Text="{Binding LastName, Mode=TwoWay}"
+                   Placeholder="Please enter your last name" />
+
+            <ListView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" HeightRequest="400">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition Width="20" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                                       Text="{Binding FirstName}" />
+                                <Label Grid.Column="1"
+                                       Text="{Binding LastName}" />
+                                <Label Grid.Column="2"
+                                       Text="{Binding Count}"
+                                       VerticalOptions="End" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Grid ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    Text="Increment Count"
+                    SemanticProperties.Hint="Increments the count"
+                    Clicked="OnCounterClicked"
+                    HorizontalOptions="End" />
+
+                <Button
+                    Grid.Column="1"
+                    Text="Add"
+                    SemanticProperties.Hint="Adds a new item"
+                    Clicked="OnAddClicked"
+                    IsEnabled="{Binding IsReady}"
+                    HorizontalOptions="Start" />
+
+                <Button
+                    Grid.Column="2"
+                    Text="Save"
+                    SemanticProperties.Hint="Saves all data"
+                    Clicked="OnSaveClicked"
+                    IsEnabled="{Binding IsReady}"
+                    HorizontalOptions="Start" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+  "settings": {
+    "readabilityRules": {
+      "allowBuiltInTypeAliases": false
+    },
+    "orderingRules": {
+      "elementOrder": [
+        "constant",
+        "accessibility"
+      ],
+      "systemUsingDirectivesFirst": true,
+      "blankLinesBetweenUsingGroups": "omit",
+      "usingDirectivesPlacement": "outsideNamespace"
+    },
+    "documentationRules": {
+      "companyName": "Marco von Ballmoos",
+      "copyrightText": "  Copyright (c) 2023 {companyName}. All rights reserved.",
+      "xmlHeader": true,
+      "documentInterfaces": true,
+      "documentExposedElements": true,
+      "documentationCulture": "en-US",
+      "fileNamingConvention": "stylecop"
+    },
+    "namingRules": {
+      "tupleElementNameCasing": "camelCase",
+      "allowedNamespaceComponents": [
+        "iOS"
+      ]
+    },
+    "maintainabilityRules": {
+      "topLevelTypes": [
+        "class",
+        "interface",
+        "delegate",
+        "enum",
+        "struct"
+      ]
+    },
+    "layoutRules": {
+      "allowConsecutiveUsings": true,
+      "newlineAtEndOfFile": "allow"
+    }
+  }
+}
