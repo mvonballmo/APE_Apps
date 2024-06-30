@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="Maui2024.AppShell"
+    x:Class="LZ2.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Maui2024"
+    xmlns:lz2="clr-namespace:LZ2"
     Shell.FlyoutBehavior="Disabled"
-    Title="Maui2024">
+    Title="LZ2">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate lz2:MainPage}"
         Route="MainPage" />
 
 </Shell>

@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Maui2024;
+namespace LZ2;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

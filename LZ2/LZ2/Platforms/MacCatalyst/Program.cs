@@ -1,7 +1,6 @@
-﻿using ObjCRuntime;
-using UIKit;
+﻿using UIKit;
 
-namespace Maui2024;
+namespace LZ2;
 
 public class Program
 {

@@ -105,7 +105,7 @@ public class LocalStorageServiceTests : TestsBase
     protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
     {
         return base.AddServices(serviceCollection)
-            .AddSingleton(new LocalStorageSettings { DatabaseFilename = "Maui2024Tests.db3" });
+            .AddSingleton(new LocalStorageSettings { DatabaseFilename = "LZ2Tests.db3" });
     }
 
     private async Task<ILocalStorage> GetLocalStorage()

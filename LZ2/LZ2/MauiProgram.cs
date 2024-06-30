@@ -1,9 +1,8 @@
 ﻿using CommunityToolkit.Maui;
-using Core;
 using Core.Services;
 using Microsoft.Extensions.Logging;
 
-namespace Maui2024;
+namespace LZ2;
 
 public static class MauiProgram
 {

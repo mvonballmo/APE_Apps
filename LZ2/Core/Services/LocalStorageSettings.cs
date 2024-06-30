@@ -10,5 +10,5 @@ public class LocalStorageSettings
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             DatabaseFilename);
 
-    public string DatabaseFilename { get; set; } = "Maui2024.db3";
+    public string DatabaseFilename { get; set; } = "LZ2.db3";
 }

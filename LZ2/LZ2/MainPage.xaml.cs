@@ -1,6 +1,6 @@
 ﻿using Core;
 
-namespace Maui2024;
+namespace LZ2;
 
 public partial class MainPage : ContentPage
 {
