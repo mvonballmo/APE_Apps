@@ -14,4 +14,6 @@ public class Person
     public string LastName { get; set; } = "Muster";
 
     public int Age { get; set; } = 1;
+
+    public int PLZ { get; set; } = 8623;
 }

@@ -12,6 +12,7 @@ public partial class MainPageViewModel : ViewModelBase
     private string _lastName = string.Empty;
     private int _age;
     private Person? _selectedItem;
+    private int _plz;
 
     public MainPageViewModel()
     {
@@ -82,6 +83,12 @@ public partial class MainPageViewModel : ViewModelBase
         }
     }
 
+    public int PLZ
+    {
+        get => _plz;
+        set => SetField(ref _plz, value);
+    }
+
     public void Increment()
     {
         Age += 1;
@@ -132,6 +139,7 @@ public partial class MainPageViewModel : ViewModelBase
         model.FirstName = FirstName;
         model.LastName = LastName;
         model.Age = Age;
+        model.PLZ = PLZ;
 
         await _localStorage.Save(model);
     }
