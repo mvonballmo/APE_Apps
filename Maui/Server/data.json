@@ -1,10 +1,4 @@
 {
-  "login": [
-    "AuthorizationKey"
-  ],
-  "dummy": [
-    "dummy"
-  ],
   "albums": [
     {
       "title": "First album",
