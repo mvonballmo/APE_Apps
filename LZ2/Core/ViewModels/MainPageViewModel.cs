@@ -13,15 +13,17 @@ public partial class MainPageViewModel : ViewModelBase
     private int _age;
     private Person? _selectedItem;
     private int _plz;
+    private readonly IPersonService _personService;
 
     public MainPageViewModel()
     {
         // throw new InvalidOperationException("This constructor is for detecting binding in XAML and should never be called.");
     }
 
-    public MainPageViewModel(ILocalStorage localStorage)
+    public MainPageViewModel(ILocalStorage localStorage, IPersonService personService)
     {
         _localStorage = localStorage ?? throw new ArgumentNullException(nameof(localStorage));
+        _personService = personService ?? throw new ArgumentNullException(nameof(personService));
     }
 
     public string FirstName
@@ -101,14 +103,7 @@ public partial class MainPageViewModel : ViewModelBase
         {
             try
             {
-                await _localStorage.Initialize();
-
-                var people = await _localStorage.LoadAll();
-
-                if (people.Count == 0)
-                {
-                    people.Add(new Person());
-                }
+                var people = await _personService.LoadAll();
 
                 foreach (var person in people)
                 {
@@ -129,19 +124,21 @@ public partial class MainPageViewModel : ViewModelBase
 
     public async Task Save()
     {
-        var model = SelectedItem;
+        await _localStorage.Initialize();
 
-        if (model == null)
+        var person = SelectedItem;
+
+        if (person == null)
         {
             throw new InvalidOperationException("Cannot save a non-existent model");
         }
 
-        model.FirstName = FirstName;
-        model.LastName = LastName;
-        model.Age = Age;
-        model.PLZ = PLZ;
+        person.FirstName = FirstName;
+        person.LastName = LastName;
+        person.Age = Age;
+        person.PLZ = PLZ;
 
-        await _localStorage.Save(model);
+        _personService.Save(person);
     }
 
     public void Add()
