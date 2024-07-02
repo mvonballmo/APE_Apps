@@ -46,32 +46,34 @@
             <Entry Text="{Binding PLZ, Mode=TwoWay}"
                    Placeholder="Please enter your zip code" />
 
-            <ListView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" HeightRequest="400">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid Padding="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="250" />
-                                    <ColumnDefinition Width="250" />
-                                    <ColumnDefinition Width="20" />
-                                    <ColumnDefinition Width="50"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0"
-                                       Text="{Binding FirstName}" />
-                                <Label Grid.Column="1"
-                                       Text="{Binding LastName}" />
-                                <Label Grid.Column="2"
-                                       Text="{Binding Age}"
-                                       VerticalOptions="End" />
-                                <Label Grid.Column="3"
-                                       Text="{Binding PLZ}"
-                                       VerticalOptions="End" />
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <Frame BorderColor="{StaticResource Primary}">
+                <ListView ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" HeightRequest="400" BackgroundColor="Azure">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="250" />
+                                        <ColumnDefinition Width="250" />
+                                        <ColumnDefinition Width="20" />
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0"
+                                           Text="{Binding FirstName}" />
+                                    <Label Grid.Column="1"
+                                           Text="{Binding LastName}" />
+                                    <Label Grid.Column="2"
+                                           Text="{Binding Age}"
+                                           VerticalOptions="End" />
+                                    <Label Grid.Column="3"
+                                           Text="{Binding PLZ}"
+                                           VerticalOptions="End" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
 
             <Grid ColumnSpacing="20">
                 <Grid.ColumnDefinitions>
